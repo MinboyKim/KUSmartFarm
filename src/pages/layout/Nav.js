@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
-
+import classes from "../../css/Nav.module.css";
+import { Profiler } from "react";
+import Profile from "../../components/Profile.js";
 const Nav = () => {
   return (
-    <nav>
+    <nav className={classes.layout}>
+        <Profile>
+        </Profile>
       <ul>
         <li>
           <Link to="/">메인 화면</Link>
