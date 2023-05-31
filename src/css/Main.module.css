@@ -4,5 +4,71 @@
 
 .main {
   background-color: gray;
+  padding: 20px;
+}
+
+.dateWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.dateWrapper > button {
+  width: 200px;
+  border: 1px solid #aeaeae;
+  border-radius: 5px;
+  background-color: rgb(184, 243, 41);
+}
+
+.graphWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.graphWrapper > div {
+  width: fit-content;
+}
+
+.btn {
+  border: 1px solid #aeaeae;
+  border-radius: 3px;
   padding: 10px;
+  margin-right: 10px;
+  background-color: white;
+}
+
+.graphWrapper div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.graphWrapper div:first-child h4 {
+  margin-right: 10px;
+}
+
+.graphWrapper div:nth-child(2) {
+  height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.show {
+  margin: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.tableWrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
