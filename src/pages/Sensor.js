@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from "./layout/Nav";
+import classes from "../css/Sensor.module.css";
 
 const Sensor = () => {
   return (
