@@ -6,6 +6,7 @@ const Main = () => {
     <div>
       <h1>Main</h1>
       <Link to="/sensor">Sensor</Link>
+      <br />
       <Link to="/scale">Scale</Link>
     </div>
   );
