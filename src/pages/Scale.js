@@ -1,13 +1,12 @@
 import React from "react";
+import Nav from "../components/Nav";
 import { Link } from "react-router-dom";
 
 const Scale = () => {
   return (
     <div>
       <h1>Scale</h1>
-      <Link to="/">Main</Link>
-      <br />
-      <Link to="/sensor">Sensor</Link>
+      <Nav />
     </div>
   );
 };

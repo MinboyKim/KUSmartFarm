@@ -1,9 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "./Main";
-import Sensor from "./Sensor";
-import Scale from "./Scale";
-import NotFound from "./NotFound";
+import Main from "./pages/Main";
+import Sensor from "./pages/Sensor";
+import Scale from "./pages/Scale";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
