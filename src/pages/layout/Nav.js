@@ -9,7 +9,7 @@ const Nav = () => {
       <navbar className={Navstyle.navbar}>
         <ul className={Navstyle.navBarMenu}>
           <li className={Navstyle.list}>
-            <Link to="/" className={Navstyle.link}>
+            <Link to="/" className={Navstyle.list}>
               메인 화면
             </Link>
           </li>
