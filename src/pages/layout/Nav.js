@@ -8,15 +8,18 @@ const Nav = (props) => {
   const [dropdownVisibility, setDropdownVisibility] = React.useState(false);
   const [dropdownVisibility2, setDropdownVisibility2] = React.useState(false);
 
+  const handleButtonClick = () => {
+    setDropdownVisibility(!dropdownVisibility);
+  };
+  const handleButtonClick2 = () => {
+    setDropdownVisibility2(!dropdownVisibility2);
+  };
   return (
     <nav className={Navstyle.layout}>
       <Profile></Profile>
       <navbar className={Navstyle.navbar}>
         <ul className={Navstyle.navBarMenu}>
-          <li
-            className={Navstyle.list}
-            onClick={(e) => setDropdownVisibility(!dropdownVisibility)}
-          >
+          <li className={Navstyle.list} onClick={handleButtonClick}>
             {dropdownVisibility ? "환경센서 ▽" : "환경센서 "}
           </li>
           <Dropdown visibility={dropdownVisibility}>
@@ -32,10 +35,7 @@ const Nav = (props) => {
               </Link>
             </ul>
           </Dropdown>
-          <li
-            className={Navstyle.list}
-            onClick={(e) => setDropdownVisibility2(!dropdownVisibility2)}
-          >
+          <li className={Navstyle.list} onClick={handleButtonClick2}>
             {dropdownVisibility2 ? "육계저울 ▽" : "육계저울 "}
           </li>
           <Dropdown visibility={dropdownVisibility2}>

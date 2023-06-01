@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./layout/Nav";
 import classes from "../css/Main.module.css";
 import Card from "../components/Card";
 import Container from "../css/Container.module.css";
 import Layout from "./layout/Layout";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-const Sensor = () => {
+const Sensor = (props) => {
+  const [calenderVisibility, setCalenderVisibility] = useState(false);
+
+  const handleButtonClick = () => {
+    setCalenderVisibility(!calenderVisibility);
+  };
   return (
     <div>
       <Layout>
@@ -17,7 +24,18 @@ const Sensor = () => {
                 <div>
                   <button className={classes.btn}>1개월</button>
                   <button className={classes.btn}>지난달</button>
-                  <button className={classes.btn}>기간</button>
+                  <button className={classes.btn} onClick={handleButtonClick}>
+                    {calenderVisibility ? "기간 ▽" : "기간 "}
+                  </button>
+                  {calenderVisibility && (
+                    <div
+                      style={{
+                        position: "absolute",
+                      }}
+                    >
+                      <Calendar />
+                    </div>
+                  )}
                 </div>
                 <button>조회</button>
               </div>
