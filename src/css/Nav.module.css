@@ -3,7 +3,7 @@ layout은 화면의 왼쪽에 수직으로 구성된다.
 */
 .layout {
   width: 200px;
-  height: 500px;
+  height: 800px;
   display: flex;
   flex-direction: column;
   background-color: rgb(240, 244, 218);
@@ -25,7 +25,7 @@ layout은 화면의 왼쪽에 수직으로 구성된다.
 
 .navBarMenu {
   list-style: none;
-  background-color: orange;
+  background-color: rgb(240, 244, 218);
   display: flex;
   flex-direction: column;
   margin: 0px;
@@ -36,31 +36,22 @@ layout은 화면의 왼쪽에 수직으로 구성된다.
 }
 .navBarMenu li {
   flex-basis: 50px;
-
-  background-color: green;
-  /* margin-right: 100px; */
-  margin: 0px;
-  border-bottom: 1px solid white;
 }
 
 .link {
-  margin: 0px;
-  text-decoration: none;
-  color: white;
-  background-color: red;
+  /* list-style: none; */
+  background-color: rgb(240, 244, 218);
   display: flex;
-  display: none;
-  /* justify-content: center; */
-  align-items: center;
-  height: 100%;
+  flex-direction: column;
+  margin: 0px;
+  padding: auto;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
 }
 
 ul li {
   list-style: none;
-}
-
-.link li {
-  /* display: none; */
 }
 
 .list {
@@ -72,11 +63,38 @@ ul li {
   /* justify-content: center; */
   align-items: center;
   height: 100%;
+  background-color: green;
+  /* margin-right: 100px; */
+  margin: 0px;
+  border-bottom: 1px solid white;
+  padding-left: 10px;
+}
+
+.customUl > li {
+  margin: 0px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(240, 244, 218);
+  text-decoration: none;
+  color: black;
+  padding-left: 10px;
+}
+.customUl > li:hover {
+  background-color: lightgreen;
+}
+.customUl > li > * {
+  color: black;
+  text-decoration: none;
 }
 
 .list :hover {
   background-color: lightgreen;
-  .link {
-    display: inline;
-  }
+}
+
+.expanded {
+  display: block;
 }
