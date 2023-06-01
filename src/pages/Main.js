@@ -15,12 +15,16 @@ const Main = () => {
   };
 
   return (
-    <div>
-      <Link to="/sensor">링크</Link>
+    <div className={classes.mainWrapper}>
+      <h1 className={classes.header}>KU Smart Farm</h1>
       <br />
       <input id="id" type="text" placeholder="아이디" />
+      <br />
       <input id="pwd" type="password" placeholder="비밀번호" />
-      <button onClick={handleLogin}>로그인</button>
+      <br />
+      <button className={classes.loginBtn} onClick={handleLogin}>
+        로그인
+      </button>
     </div>
   );
 };
