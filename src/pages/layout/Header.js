@@ -3,7 +3,8 @@ import classes from "../../css/Header.module.css";
 const Header = () => {
   return (
     <header className={classes.wrapper}>
-      <div>
+      <div className={classes.left}>
+        <img src={require("../../images/logo_circle.png")} width="70px"></img>
         <h1>건국 Smart Farm</h1>
       </div>
       <div>
