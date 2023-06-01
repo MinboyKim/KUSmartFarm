@@ -9,7 +9,9 @@ const Dropdown = (props) => {
     if (props.visibility) {
       setVisibilityAnimation(true);
     } else {
-      setVisibilityAnimation(false);
+      setTimeout(() => {
+        setVisibilityAnimation(false);
+      }, 400);
     }
   }, [props.visibility]);
 

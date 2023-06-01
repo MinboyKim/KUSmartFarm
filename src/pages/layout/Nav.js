@@ -17,7 +17,7 @@ const Nav = (props) => {
             className={Navstyle.list}
             onClick={(e) => setDropdownVisibility(!dropdownVisibility)}
           >
-            환경센서
+            {dropdownVisibility ? "환경센서 ▽" : "환경센서 "}
           </li>
           <Dropdown visibility={dropdownVisibility}>
             <ul className={`${Navstyle.link} ${Navstyle.customUl}`}>
@@ -36,7 +36,7 @@ const Nav = (props) => {
             className={Navstyle.list}
             onClick={(e) => setDropdownVisibility2(!dropdownVisibility2)}
           >
-            육계 저울
+            {dropdownVisibility2 ? "육계저울 ▽" : "육계저울 "}
           </li>
           <Dropdown visibility={dropdownVisibility2}>
             <ul className={`${Navstyle.link} ${Navstyle.customUl}`}>
