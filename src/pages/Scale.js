@@ -7,6 +7,7 @@ import Container from "../css/Container.module.css";
 const Scale = () => {
   return (
     <div>
+
       <div className={Container.container}>
         <Nav />
         <main className={classes.main}>
@@ -48,6 +49,7 @@ const Scale = () => {
                 <h1>표</h1>
               </div>
             </div>
+
           </Card>
         </main>
       </div>

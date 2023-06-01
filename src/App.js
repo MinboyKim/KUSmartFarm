@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import Layout from "./pages/layout/Layout";
 import Header from "./pages/layout/Header";
 import Footer from "./pages/layout/Footer";
+import Contents from "./pages/layout/Contents";
 
 function App() {
   return (
@@ -14,12 +15,14 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Header />
-          <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/sensor/*" element={<Sensor />}></Route>
-            <Route path="/scale/*" element={<Scale />}></Route>
-            <Route path="*" element={<NotFound />}></Route>
-          </Routes>
+          <Contents>
+            <Routes>
+              <Route path="/" element={<Main />}></Route>
+              <Route path="/sensor/*" element={<Sensor />}></Route>
+              <Route path="/scale/*" element={<Scale />}></Route>
+              <Route path="*" element={<NotFound />}></Route>
+            </Routes>
+          </Contents>
           <Footer />
         </Layout>
       </BrowserRouter>
