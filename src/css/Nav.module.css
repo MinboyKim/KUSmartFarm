@@ -3,14 +3,15 @@ layout은 화면의 왼쪽에 수직으로 구성된다.
 */
 .layout {
   width: 200px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   background-color: rgb(240, 244, 218);
   justify-content: flex-start;
   align-items: flex-start;
   flex-basis: auto;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.2);
 }
 
 .layout > * {

@@ -17,6 +17,7 @@
   flex-direction: column;
   padding-bottom: 30px;
   padding-top: 10px;
+  border-top-right-radius: 30px;
   border-top-left-radius: 30px;
   padding: 20px;
   justify-content: center;

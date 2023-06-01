@@ -8,6 +8,7 @@
   width: 100%;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
+  margin-top: -50px;
 }
 
 .dateWrapper {

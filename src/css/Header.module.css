@@ -6,6 +6,12 @@
   font-family: "SBAggroM";
 }
 
+.wrapper h1 {
+  font-size: 30px;
+  margin: 0;
+  width: 280px;
+}
+
 .gnb {
   display: flex;
   justify-content: flex-end;
@@ -15,13 +21,13 @@
   display: flex;
   justify-content: flex-end;
   list-style: none;
-  width: 70%;
+  width: 100%;
 }
 
-li {
+.wrapper li {
   padding: 10px;
   cursor: pointer;
-  width: 170px;
+  width: 100px;
 }
 
 .left {
