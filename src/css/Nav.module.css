@@ -83,20 +83,22 @@ ul li {
   color: black;
   padding-left: 10px;
 }
-.customUl > li:hover {
-  background-color: lightgreen;
-}
-.customUl > li > * {
-  color: black;
+.link2 {
+  margin: 0px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(240, 244, 218);
   text-decoration: none;
+  color: black;
+  padding-left: 10px;
+  flex-basis: 50px;
 }
-
-.list :hover {
+.link2:hover {
   background-color: lightgreen;
-}
-
-.expanded {
-  display: block;
 }
 
 @keyframes slide-fade-in-dropdown-animation {

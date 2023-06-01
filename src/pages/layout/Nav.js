@@ -21,15 +21,15 @@ const Nav = (props) => {
           </li>
           <Dropdown visibility={dropdownVisibility}>
             <ul className={`${Navstyle.link} ${Navstyle.customUl}`}>
-              <li className={Navstyle.list2}>
-                <Link to="/sensor">센서1</Link>
-              </li>
-              <li>
-                <Link to="/sensor">센서2</Link>
-              </li>
-              <li>
-                <Link to="/sensor">센서3</Link>
-              </li>
+              <Link to="/sensor" className={Navstyle.link2}>
+                센서1
+              </Link>
+              <Link to="/sensor" className={Navstyle.link2}>
+                센서2
+              </Link>
+              <Link to="/sensor" className={Navstyle.link2}>
+                센서3
+              </Link>
             </ul>
           </Dropdown>
           <li
@@ -40,15 +40,15 @@ const Nav = (props) => {
           </li>
           <Dropdown visibility={dropdownVisibility2}>
             <ul className={`${Navstyle.link} ${Navstyle.customUl}`}>
-              <li>
-                <Link to="/scale">저울1</Link>
-              </li>
-              <li>
-                <Link to="/scale">저울2</Link>
-              </li>
-              <li>
-                <Link to="/scale">저울3</Link>
-              </li>
+              <Link to="/scale" className={Navstyle.link2}>
+                저울1
+              </Link>
+              <Link to="/scale" className={Navstyle.link2}>
+                저울2
+              </Link>
+              <Link to="/scale" className={Navstyle.link2}>
+                저울3
+              </Link>
             </ul>
           </Dropdown>
         </ul>
