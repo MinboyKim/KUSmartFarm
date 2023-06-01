@@ -11,10 +11,12 @@
 }
 
 .back {
-  background-color: #00ff00;
+  background-color: rgb(33, 186, 59);
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
+  padding-top: 10px;
   border-top-left-radius: 30px;
   padding: 20px;
   justify-content: center;
@@ -28,7 +30,6 @@
   color: white;
   font-size: 3px;
 }
-
 .list :hover {
   background-color: lightgreen;
 }
