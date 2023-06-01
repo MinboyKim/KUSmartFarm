@@ -2,17 +2,50 @@
 layout은 화면의 왼쪽에 수직으로 구성된다.
 */
 .layout {
-    width: 200px;
+  width: 200px;
 
-    display: flex;
-    flex-direction: column;
-    background-color: aquamarine;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-basis: auto
+  display: flex;
+  flex-direction: column;
+  background-color: aquamarine;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-basis: auto;
 }
 
 .layout > * {
-    width: 100%;
-  }
-  
+  width: 100%;
+}
+
+.navbar {
+  background-color: red;
+  margin: 0px;
+}
+
+.navBarMenu {
+  list-style: none;
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  padding: auto;
+}
+.navBarMenu li {
+  flex-basis: 50px;
+
+  background-color: green;
+  /* margin-right: 100px; */
+  margin: 0px;
+  border-bottom: 1px solid white;
+}
+
+.link {
+  margin: 0px;
+  text-decoration: none;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100%;
+}

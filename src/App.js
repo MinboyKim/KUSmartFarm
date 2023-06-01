@@ -15,14 +15,12 @@ function App() {
       <BrowserRouter>
         <Layout>
           <Header />
-          <Contents>
-            <Routes>
-              <Route path="/" element={<Main />}></Route>
-              <Route path="/sensor/*" element={<Sensor />}></Route>
-              <Route path="/scale/*" element={<Scale />}></Route>
-              <Route path="*" element={<NotFound />}></Route>
-            </Routes>
-          </Contents>
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/sensor/*" element={<Sensor />}></Route>
+            <Route path="/scale/*" element={<Scale />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
+          </Routes>
           <Footer />
         </Layout>
       </BrowserRouter>
