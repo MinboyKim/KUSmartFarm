@@ -1,0 +1,23 @@
+.wrapper {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gnb {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  width: 70%;
+}
+
+li {
+  padding: 10px;
+  cursor: pointer;
+  width: 170px;
+}

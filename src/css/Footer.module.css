@@ -1,0 +1,19 @@
+.wrapper {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+span {
+  margin-right: 20px;
+}
+
+.footerSpan {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.copyright {
+  text-align: right;
+}

@@ -4,10 +4,10 @@ import Main from "./pages/Main";
 import Sensor from "./pages/Sensor";
 import Scale from "./pages/Scale";
 import NotFound from "./pages/NotFound";
-import Layout from "./pages/layout/Layout";
 import Header from "./pages/layout/Header";
 import Footer from "./pages/layout/Footer";
 import Contents from "./pages/layout/Contents";
+import Layout from "./pages/layout/Layout";
 
 function App() {
   return (
