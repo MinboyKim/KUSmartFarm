@@ -7,6 +7,8 @@
   padding: 20px;
   flex-basis: 100%;
   width: 100%;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 .dateWrapper {
@@ -58,7 +60,7 @@
 }
 
 .show {
-  margin: 10px;
+  margin: 30px;
   display: flex;
   justify-content: flex-start;
 }

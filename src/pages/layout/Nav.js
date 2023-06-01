@@ -9,11 +9,6 @@ const Nav = () => {
       <navbar className={Navstyle.navbar}>
         <ul className={Navstyle.navBarMenu}>
           <li>
-            <Link to="/" className={Navstyle.link}>
-              메인 화면
-            </Link>
-          </li>
-          <li>
             <Link to="/sensor" className={Navstyle.link}>
               환경 센서
             </Link>
