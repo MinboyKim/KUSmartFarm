@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <header className={classes.wrapper}>
       <div className={classes.left}>
-        <img src={require("../../images/logo_circle.png")} width="70px"></img>
+        <img src={require("../../images/char.png")} width="150px"></img>
         <h1>건국 Smart Farm</h1>
       </div>
       <div>
