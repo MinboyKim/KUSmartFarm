@@ -9,7 +9,6 @@ const Main = () => {
       <div className={Container.container}>
         <Nav />
         <main className={classes.main}>
-            메인 페이지 입니다.
             <Card>
             <div className={classes.dateWrapper}>
                 <div>
