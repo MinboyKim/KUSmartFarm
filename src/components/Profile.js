@@ -4,9 +4,14 @@ import Profiles from "../css/Profile.module.css";
 
 const Profile = ()=> {
     return (
-        <div>
+        <div className={Profiles.back}>
             <div className={Profiles.image}>
-                <h2>여기는 이미지 입니다.</h2>
+            </div>
+            <div className={Profiles.text}>
+                <p>우리농장</p>
+                <br/>
+                <p>안녕하세요 박대원님</p>
+                <p>최근접속:</p>
             </div>
         </div>
     );

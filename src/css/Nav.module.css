@@ -3,11 +3,16 @@ layout은 화면의 왼쪽에 수직으로 구성된다.
 */
 .layout {
     width: 200px;
-    height: 100%;
+
     display: flex;
     flex-direction: column;
-    position: fixed;
     background-color: aquamarine;
     justify-content: flex-start;
     align-items: flex-start;
+    flex-basis: auto
 }
+
+.layout > * {
+    width: 100%;
+  }
+  

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import classes from "../../css/Nav.module.css";
-import { Profiler } from "react";
+import Profiles from "../../css/Profile.module.css";
 import Profile from "../../components/Profile.js";
+
 const Nav = () => {
   return (
     <nav className={classes.layout}>
