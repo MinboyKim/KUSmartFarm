@@ -8,18 +8,27 @@ const Nav = () => {
       <Profile></Profile>
       <navbar className={Navstyle.navbar}>
         <ul className={Navstyle.navBarMenu}>
-          <li>
+          <li className={Navstyle.list}>
             <Link to="/" className={Navstyle.link}>
               메인 화면
             </Link>
           </li>
-          <li>
-            <Link to="/sensor" className={Navstyle.link}>
-              환경 센서
-            </Link>
+          <li className={Navstyle.list}>
+            환경 센서
+            <ul className={Navstyle.link}>
+              <li>
+                <Link to="/sensor"></Link>
+              </li>
+              <li>
+                <Link to="/sensor"></Link>
+              </li>
+              <li>
+                <Link to="/sensor"></Link>
+              </li>
+            </ul>
           </li>
           <li>
-            <Link to="/scale" className={Navstyle.link}>
+            <Link to="/scale" className={Navstyle.list}>
               육계 저울
             </Link>
           </li>

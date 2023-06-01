@@ -28,6 +28,9 @@ layout은 화면의 왼쪽에 수직으로 구성된다.
   flex-direction: column;
   margin: 0px;
   padding: auto;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
 }
 .navBarMenu li {
   flex-basis: 50px;
@@ -41,6 +44,25 @@ layout은 화면의 왼쪽에 수직으로 구성된다.
 .link {
   margin: 0px;
   text-decoration: none;
+  color: white;
+  background-color: red;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100%;
+}
+
+ul li {
+  list-style: none;
+}
+
+.link li {
+  /* display: none; */
+}
+
+.list {
+  margin: 0px;
+
   color: white;
   font-size: 10px;
   font-weight: bold;

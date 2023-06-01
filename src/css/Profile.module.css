@@ -11,9 +11,11 @@
 }
 
 .back {
-  background-color: #00ff00;
+  background-color: lightgreen;
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
+  padding-top: 10px;
 }
 
 .text {
