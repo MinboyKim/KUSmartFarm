@@ -3,7 +3,7 @@
 }
 
 .main {
-  background-color: gray;
+  background-color: rgb(200, 200, 200);
   padding: 20px;
   flex-basis: 100%;
 }
