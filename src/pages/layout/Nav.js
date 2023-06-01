@@ -14,7 +14,7 @@ const Nav = () => {
             </Link>
           </li>
           <li>
-            <Link to="/scale" className={Navstyle.link}>
+            <Link to="/scale" className={Navstyle.list}>
               육계 저울
             </Link>
           </li>
