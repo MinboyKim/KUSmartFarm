@@ -9,7 +9,7 @@ const Profile = () => {
       <div className={Profiles.text}>
         <p>우리농장</p>
         <br />
-        <p>안녕하세요 박대원님</p>
+        <p>안녕하세요 강대훈님</p>
         <p>최근접속:2023년 06월 1일</p>
       </div>
     </div>
