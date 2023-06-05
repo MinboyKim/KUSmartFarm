@@ -11,8 +11,12 @@ import SensorTable from "../components/SensorTable";
 
 const Sensor = (props) => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
+  const [buttonColors, setButtonColors] = useState({}); // 상태로 각 버튼의 배경색을 관리
 
-  const handleButtonClick = () => {
+  
+  const handleButtonClick = (event) => {
+    const clickedButton = event.target;
+    clickedButton.style.backgroundColor = "rgb(184, 243, 41)";
     setCalenderVisibility(!calenderVisibility);
   };
   return (
