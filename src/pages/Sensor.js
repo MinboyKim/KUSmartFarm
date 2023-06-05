@@ -6,6 +6,8 @@ import Container from "../css/Container.module.css";
 import Layout from "./layout/Layout";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import SensorChart from "../components/SensorChart.js";
+import SensorTable from "../components/SensorTable";
 
 const Sensor = (props) => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
@@ -47,7 +49,7 @@ const Sensor = (props) => {
                   <span>2023-03-20 ~ 2023-04-20</span>
                 </div>
                 <div>
-                  <h1>그래프</h1>
+                  <SensorChart />
                 </div>
                 <div>
                   <button className={classes.btn}>이산화탄소</button>
@@ -72,7 +74,7 @@ const Sensor = (props) => {
                   <span>출력 및 다운로드</span>
                 </div>
                 <div>
-                  <h1>표</h1>
+                  <SensorTable />
                 </div>
               </div>
             </Card>

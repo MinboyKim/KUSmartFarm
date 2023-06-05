@@ -20,7 +20,7 @@ const Nav = (props) => {
       <navbar className={Navstyle.navbar}>
         <ul className={Navstyle.navBarMenu}>
           <li className={Navstyle.list} onClick={handleButtonClick}>
-            {dropdownVisibility ? "환경센서 ▽" : "환경센서 "}
+            {dropdownVisibility ? "환경센서" : "환경센서 "}
           </li>
           <Dropdown visibility={dropdownVisibility}>
             <ul className={`${Navstyle.link} ${Navstyle.customUl}`}>
@@ -36,7 +36,7 @@ const Nav = (props) => {
             </ul>
           </Dropdown>
           <li className={Navstyle.list} onClick={handleButtonClick2}>
-            {dropdownVisibility2 ? "육계저울 ▽" : "육계저울 "}
+            {dropdownVisibility2 ? "육계저울" : "육계저울 "}
           </li>
           <Dropdown visibility={dropdownVisibility2}>
             <ul className={`${Navstyle.link} ${Navstyle.customUl}`}>

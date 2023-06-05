@@ -6,6 +6,8 @@ import Container from "../css/Container.module.css";
 import Layout from "./layout/Layout";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import ScaleChart from "../components/ScaleChart";
+import ScaleTable from "../components/ScaleTable";
 
 const Scale = (props) => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
@@ -48,7 +50,7 @@ const Scale = (props) => {
                   <span>2023-03-20 ~ 2023-04-20</span>
                 </div>
                 <div>
-                  <h1>그래프</h1>
+                  <ScaleChart />
                 </div>
               </div>
             </Card>
@@ -66,7 +68,7 @@ const Scale = (props) => {
                   <span>출력 및 다운로드</span>
                 </div>
                 <div>
-                  <h1>표</h1>
+                  <ScaleTable />
                 </div>
               </div>
             </Card>
