@@ -12,9 +12,9 @@ const connection = mysql.createConnection({
 
 /*
 REQ
-엔드포인트: /api/data
+엔드포인트: /api/environment
 요청 파라미터: startDate, endDate (날짜 범위)
-응답: JSON 형태로 해당 기간의 KU_TBL_ENVIRONMENT_HIST 데이터 반환
+응답: JSON 형태로 해당 기간의 KU_TBL_ENVIRONMENT 데이터 반환
 
 RES
 성공 응답 (200 OK)
@@ -35,9 +35,12 @@ connection.connect(function (err) {
   console.log("Connected to database as id " + connection.threadId);
 });
 
-app.get('/data/:startDate/:endDate', (req, res) => {
-    const startDate = req.params.startDate;
-    const endDate = req.params.endDate;
+app.get('/data', (req, res) => {
+    var sd= req.param("startDate");
+    var ed = req.param("endDate");
+
+    const startDate = sd;
+    const endDate = ed;
   
     // MySQL 쿼리 작성
     const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
@@ -54,6 +57,30 @@ app.get('/data/:startDate/:endDate', (req, res) => {
       res.json(results);
     });
   });
+
+
+  app.get('/data2', (req, res) => {
+    var sd= req.param("startDate");
+    var ed = req.param("endDate");
+
+    const startDate = sd;
+    const endDate = ed;
+    // MySQL 쿼리 작성
+    const query = `SELECT * FROM KU_TBL_SCALE_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
+  
+    // MySQL 쿼리 실행
+    connection.query(query, [startDate, endDate], (err, results) => {  //startDate와 endDate가 ? 자리에 들어간다.
+      if (err) {
+        console.error('Error executing query: ' + err.stack);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+  
+      // 쿼리 결과를 JSON 형태로 반환
+      res.json(results);
+    });
+  });
+
 
 
 app.use(express.static(path.join(__dirname, "build")));
