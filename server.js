@@ -12,9 +12,9 @@ const connection = mysql.createConnection({
 
 /*
 REQ
-엔드포인트: /api/environment
+엔드포인트: /api/data
 요청 파라미터: startDate, endDate (날짜 범위)
-응답: JSON 형태로 해당 기간의 KU_TBL_ENVIRONMENT 데이터 반환
+응답: JSON 형태로 해당 기간의 KU_TBL_ENVIRONMENT_HIST 데이터 반환
 
 RES
 성공 응답 (200 OK)
@@ -58,18 +58,6 @@ app.get('/data/:startDate/:endDate', (req, res) => {
 
 app.use(express.static(path.join(__dirname, "build")));
 
-app.get('/data', (req, res) => {
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-
-    connection.query('SELECT * FROM KU_TBL_ENVIRONMENT', (error, results) => {
-      if (error) {
-        console.error('Error executing query: ' + error.stack);
-        return res.status(500).json({ error: 'Internal Server Error' });
-      }
-      res.json(results);
-    });
-});
 
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
