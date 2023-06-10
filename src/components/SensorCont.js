@@ -7,6 +7,17 @@ import Calendar from "react-calendar";
 
 const SensorCont = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [startDate, setStartDate] = useState(''); // 시작 날짜 상태 변수
+  const [endDate, setEndDate] = useState(''); // 종료 날짜 상태 변수
+  const [calenderVisibility, setCalenderVisibility] = useState(false);
+  const [buttonColors, setButtonColors] = useState({}); // 상태로 각 버튼의 배경색을 관리
+
+  const handleButtonClick = (event) => {
+    const clickedButton = event.target;
+    clickedButton.style.backgroundColor = "rgb(184, 243, 41)";
+    setCalenderVisibility(!calenderVisibility);
+  };
+
   async function handleClick(sd, ed) {
     try {
       const response = await axios.get("https://localhost:8080/data", {
