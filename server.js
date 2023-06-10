@@ -37,11 +37,8 @@ connection.connect(function (err) {
 
 
 app.get('/data', (req, res) => {
-    var sd= req.param("startDate");
-    var ed = req.param("endDate");
-
-    const startDate = sd;
-    const endDate = ed;
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
   
     // MySQL 쿼리 작성
     const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
@@ -61,15 +58,11 @@ app.get('/data', (req, res) => {
 
 
   // MySQL 쿼리 작성
-  const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
 
 
   app.get('/data2', (req, res) => {
-    var sd= req.param("startDate");
-    var ed = req.param("endDate");
-
-    const startDate = sd;
-    const endDate = ed;
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
     // MySQL 쿼리 작성
     const query = `SELECT * FROM KU_TBL_SCALE_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
   
