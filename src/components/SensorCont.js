@@ -5,7 +5,7 @@ import classes from "../css/Main.module.css";
 import axios from "axios";
 import Calendar from "react-calendar";
 //import { Calendar } from 'react-date-range';
-import 'react-calendar/dist/Calendar.css'
+import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
 import moment from "moment";
 
@@ -16,7 +16,6 @@ const SensorCont = () => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
   const [selectedRange, setSelectedRange] = useState([null, null]);
- 
 
   const clickOneMonth = (event) => {
     const today = new Date();
@@ -49,7 +48,7 @@ const SensorCont = () => {
     setCalenderVisibility(!calenderVisibility);
   };
 
-const onChangeCalender = (date) => {
+  const onChangeCalender = (date) => {
     // const selectedStartDate = moment(e[0]).format("YYYYMMDD");
     // const selectedEndDate = moment(e[1]).format("YYYYMMDD");
     setSelectedRange(date);
@@ -57,13 +56,10 @@ const onChangeCalender = (date) => {
     setEndDate(selectedRange[1]);
   };
 
-
-
   const check = () => {
     console.log(startDate, endDate);
-    //handleClick(startDate, endDate);
-  }
-
+    handleClick(startDate, endDate);
+  };
 
   async function handleClick(sd, ed) {
     setIsLoading(true);
@@ -85,26 +81,50 @@ const onChangeCalender = (date) => {
   const formatDate = (date) => {
     console.log(date);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}${month}${day}`;
   };
-
 
   return (
     <div>
       <Card>
         <div className={classes.dateWrapper}>
           <div>
-            <button className={classes.btn} onClick={clickOneMonth}   style={{
-    backgroundColor: selectedButton === "b1" ? "rgb(184, 243, 41)" : "rgb(255, 255, 255)",
-  }}>1개월</button>
-            <button className={classes.btn} onClick={clickLastMonth} style={{
-    backgroundColor: selectedButton === "b2" ? "rgb(184, 243, 41)" : "rgb(255, 255, 255)",
-  }}>지난달</button>
-            <button className={classes.btn} onClick={handleButtonClick} style={{
-    backgroundColor: selectedButton === "b3" ? "rgb(184, 243, 41)" : "rgb(255, 255, 255)",
-  }}>
+            <button
+              className={classes.btn}
+              onClick={clickOneMonth}
+              style={{
+                backgroundColor:
+                  selectedButton === "b1"
+                    ? "rgb(184, 243, 41)"
+                    : "rgb(255, 255, 255)",
+              }}
+            >
+              1개월
+            </button>
+            <button
+              className={classes.btn}
+              onClick={clickLastMonth}
+              style={{
+                backgroundColor:
+                  selectedButton === "b2"
+                    ? "rgb(184, 243, 41)"
+                    : "rgb(255, 255, 255)",
+              }}
+            >
+              지난달
+            </button>
+            <button
+              className={classes.btn}
+              onClick={handleButtonClick}
+              style={{
+                backgroundColor:
+                  selectedButton === "b3"
+                    ? "rgb(184, 243, 41)"
+                    : "rgb(255, 255, 255)",
+              }}
+            >
               {calenderVisibility ? "기간" : "기간 "}
             </button>
             {calenderVisibility && (
@@ -114,7 +134,8 @@ const onChangeCalender = (date) => {
                 }}
               >
                 <div className={classes.Calendar}>
-                  <Calendar onChange={onChangeCalender}
+                  <Calendar
+                    onChange={onChangeCalender}
 
                     // selectRange={true}
                     // nextLabel={<NextIcon />}
@@ -150,7 +171,9 @@ const onChangeCalender = (date) => {
         <button onClick={handleClick} className={classes.btn}>
           전체 센서 조회
         </button>
-        <button className={classes.btn} onClick={check}>시간대별 조회</button>
+        <button className={classes.btn} onClick={check}>
+          시간대별 조회
+        </button>
       </div>
       <Card>
         <div className={classes.tableWrapper}>
