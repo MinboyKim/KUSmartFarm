@@ -2,8 +2,10 @@ import Card from "./Card";
 import ScaleChart from "./ScaleChart";
 import ScaleTable from "./ScaleTable";
 import classes from "../css/Main.module.css";
+import { useState } from "react";
 
 const ScaleCont = () => {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div>
       <Card>
@@ -12,9 +14,7 @@ const ScaleCont = () => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          <div>
-            <ScaleChart />
-          </div>
+          {isLoading ? "Loading..." : <ScaleChart />}
         </div>
       </Card>
       <div className={classes.show}>
@@ -23,9 +23,7 @@ const ScaleCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          <div>
-            <ScaleTable />
-          </div>
+          {isLoading ? "Loading..." : <ScaleTable />}
         </div>
       </Card>
     </div>

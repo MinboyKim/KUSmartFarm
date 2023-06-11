@@ -25,6 +25,7 @@
 }
 
 .graphWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,9 +33,9 @@
   height: 400px;
 }
 
-.graphWrapper > div {
+/* .graphWrapper > div {
   width: fit-content;
-}
+} */
 
 .btn {
   border: 1px solid #aeaeae;
@@ -60,6 +61,10 @@
   align-items: center;
 }
 
+.graphWrapper__btn {
+  margin-top: 30px;
+}
+
 .show {
   margin: 30px;
   display: flex;
@@ -77,6 +82,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 50px;
+}
+
+.tableHeader button:first-child {
+  margin-right: 30px;
+}
+
+.tableHeader__btn {
+  width: 100px;
+  height: 40px;
+  border: 1px solid #aeaeae;
+  border-radius: 5px;
+  background-color: rgb(184, 243, 41);
 }
 
 input {

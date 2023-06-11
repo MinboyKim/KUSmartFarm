@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon --watch src/ ./server.js"
+    "dev": "npm run build && nodemon --watch src/ ./server.js"
   },
   "eslintConfig": {
     "extends": [

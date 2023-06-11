@@ -67,8 +67,8 @@ const SensorCont = () => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          <div>{isLoading ? "Loading..." : <SensorChart />}</div>
-          <div>
+          {isLoading ? "Loading..." : <SensorChart />}
+          <div className={classes.graphWrapper__btn}>
             <button className={classes.btn}>이산화탄소</button>
             <button className={classes.btn}>암모니아</button>
             <button className={classes.btn}>황화수소</button>
@@ -85,7 +85,7 @@ const SensorCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          <div>{isLoading ? "Loading..." : <SensorTable />}</div>
+          {isLoading ? "Loading..." : <SensorTable />}
         </div>
       </Card>
     </div>

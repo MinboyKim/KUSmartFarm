@@ -22,8 +22,8 @@ const SensorTable = () => {
       fontSize: 20,
     },
     legend: { position: "bottom" },
-    width: 800,
-    height: 400,
+    width: "100%",
+    height: "100%",
   };
 
   const headers = [
@@ -93,14 +93,18 @@ const SensorTable = () => {
         <span>
           환경센서 일별 테이블 2023-03-20 ~ 2023-04-20 (출력 : 2023-04-20)
         </span>
-        <button onClick={onClickPrint}>인쇄</button>
-        <CSVLink
-          data={csvData}
-          headers={headers}
-          filename={"환경센서_CSV_데이터"}
-        >
-          다운로드
-        </CSVLink>
+        <div>
+          <button onClick={onClickPrint} className={classes.tableHeader__btn}>
+            인쇄
+          </button>
+          <CSVLink
+            data={csvData}
+            headers={headers}
+            filename={"환경센서_CSV_데이터"}
+          >
+            <button className={classes.tableHeader__btn}>CSV 다운로드</button>
+          </CSVLink>
+        </div>
       </div>
       <Chart ref={ref} chartType="Table" data={data} options={options} />
     </div>

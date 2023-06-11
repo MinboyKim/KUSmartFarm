@@ -51,3 +51,7 @@
   font-family: "SBAggroM";
   src: url("./fonts/SB-Agro-M.ttf");
 }
+
+button {
+  cursor: pointer;
+}

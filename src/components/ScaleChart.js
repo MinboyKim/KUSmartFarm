@@ -17,8 +17,8 @@ const ScaleChart = () => {
       fontSize: 20,
     },
     legend: { position: "bottom" },
-    width: 800,
-    height: 400,
+    width: "100%",
+    height: "100%",
   };
 
   return (
