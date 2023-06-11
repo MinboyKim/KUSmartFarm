@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cf2e1946.css",
+    "main.js": "/static/js/main.d5a4939b.js",
+    "static/media/SB-Agro-L.ttf": "/static/media/SB-Agro-L.d52f7dfb589c2ed5daab.ttf",
+    "static/media/SB-Agro-B.ttf": "/static/media/SB-Agro-B.2bd2f65ded5ef6e562d3.ttf",
+    "static/media/SB-Agro-M.ttf": "/static/media/SB-Agro-M.ba7f85d311382e806808.ttf",
+    "static/media/logo_rect.png": "/static/media/logo_rect.2fe0bd421cd7d11211ef.png",
+    "static/media/char.png": "/static/media/char.ac154008aceaaf8710f4.png",
+    "static/media/pg.JPG": "/static/media/pg.909f5b5615a7849b1972.JPG",
+    "index.html": "/index.html",
+    "main.cf2e1946.css.map": "/static/css/main.cf2e1946.css.map",
+    "main.d5a4939b.js.map": "/static/js/main.d5a4939b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf2e1946.css",
+    "static/js/main.d5a4939b.js"
+  ]
+}
