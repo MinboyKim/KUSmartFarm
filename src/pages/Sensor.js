@@ -13,7 +13,6 @@ const Sensor = (props) => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [buttonColors, setButtonColors] = useState({}); // 상태로 각 버튼의 배경색을 관리
 
-  
   const handleButtonClick = (event) => {
     const clickedButton = event.target;
     clickedButton.style.backgroundColor = "rgb(184, 243, 41)";
@@ -31,7 +30,7 @@ const Sensor = (props) => {
                   <button className={classes.btn}>1개월</button>
                   <button className={classes.btn}>지난달</button>
                   <button className={classes.btn} onClick={handleButtonClick}>
-                    {calenderVisibility ? "기간 ▽" : "기간 "}
+                    {calenderVisibility ? "기간" : "기간 "}
                   </button>
                   {calenderVisibility && (
                     <div
@@ -39,7 +38,9 @@ const Sensor = (props) => {
                         position: "absolute",
                       }}
                     >
-                      <Calendar />
+                      <div className={classes.Calendar}>
+                        <Calendar />
+                      </div>
                     </div>
                   )}
                 </div>
@@ -70,13 +71,6 @@ const Sensor = (props) => {
             </div>
             <Card>
               <div className={classes.tableWrapper}>
-                <div className={classes.tableHeader}>
-                  <span>
-                    환경센서 일별 테이블 2023-03-20 ~ 2023-04-20 (출력 :
-                    2023-04-20)
-                  </span>
-                  <span>출력 및 다운로드</span>
-                </div>
                 <div>
                   <SensorTable />
                 </div>

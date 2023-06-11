@@ -110,3 +110,13 @@ input {
   border-radius: 10px;
   border: 0px;
 }
+
+@page {
+  size: A4;
+  margin: 20mm;
+}
+
+.Calendar {
+  position: absolute;
+  z-index: 100;
+}
