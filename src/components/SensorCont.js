@@ -4,11 +4,12 @@ import SensorTable from "./SensorTable";
 import classes from "../css/Main.module.css";
 import axios from "axios";
 import Calendar from "react-calendar";
+import { useState } from "react";
 
 const SensorCont = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [startDate, setStartDate] = useState(''); // 시작 날짜 상태 변수
-  const [endDate, setEndDate] = useState(''); // 종료 날짜 상태 변수
+  const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
+  const [endDate, setEndDate] = useState(""); // 종료 날짜 상태 변수
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [buttonColors, setButtonColors] = useState({}); // 상태로 각 버튼의 배경색을 관리
 
