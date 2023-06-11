@@ -5,9 +5,10 @@ import classes from "../css/Main.module.css";
 import axios from "axios";
 
 const SensorCont = () => {
+  const params = { startDate: 20220228, endDate: 20220305 };
   const handleClick = () => {
-    axios.get("http://localhost:8080/data").then((res) => {
-      console.log(res);
+    axios.get("http://localhost:8080/data", { params }).then((res) => {
+      console.log(res.data);
     });
   };
 
