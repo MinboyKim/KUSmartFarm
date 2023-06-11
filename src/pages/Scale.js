@@ -8,7 +8,7 @@ import ScaleChart from "../components/ScaleChart";
 import ScaleTable from "../components/ScaleTable";
 import Container from "../css/Container.module.css";
 import classes from "../css/Main.module.css";
-
+import ScaleCont from "../components/ScaleCont";
 import Layout from "./layout/Layout";
 import Nav from "./layout/Nav";
 
@@ -48,28 +48,7 @@ const Scale = (props) => {
                 <button>조회</button>
               </div>
             </Card>
-            <Card>
-              <div className={classes.graphWrapper}>
-                <div>
-                  <h4>조회 날짜</h4>
-                  <span>2023-03-20 ~ 2023-04-20</span>
-                </div>
-                <div>
-                  <ScaleChart />
-                </div>
-              </div>
-            </Card>
-            <div className={classes.show}>
-              <button className={classes.btn}>전체 센서 조회</button>
-              <button className={classes.btn}>시간대별 조회</button>
-            </div>
-            <Card>
-              <div className={classes.tableWrapper}>
-                <div>
-                  <ScaleTable />
-                </div>
-              </div>
-            </Card>
+            <ScaleCont />
           </main>
         </div>
       </Layout>

@@ -22,7 +22,7 @@ const ScaleTable = () => {
       fontSize: 20,
     },
     legend: { position: "bottom" },
-    width: 800,
+    width: "100%",
     height: 400,
   };
 
