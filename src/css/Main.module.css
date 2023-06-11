@@ -33,6 +33,10 @@
   height: 400px;
 }
 
+.graphWrapper__header {
+  margin-bottom: 40px;
+}
+
 /* .graphWrapper > div {
   width: fit-content;
 } */

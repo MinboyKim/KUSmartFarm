@@ -63,7 +63,7 @@ const SensorCont = () => {
       </Card>
       <Card>
         <div className={classes.graphWrapper}>
-          <div>
+          <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>

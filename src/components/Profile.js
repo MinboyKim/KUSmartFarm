@@ -5,7 +5,9 @@ import Profiles from "../css/Profile.module.css";
 const Profile = () => {
   return (
     <div className={Profiles.back}>
-      <div className={Profiles.image}></div>
+      <div className={Profiles.image}>
+        <img src={require("../images/kuprofile.png")} width="70px"></img>
+      </div>
       <div className={Profiles.text}>
         <p>우리농장</p>
         <br />

@@ -26,6 +26,7 @@ const ScaleTable = () => {
     height: "100%",
   };
 
+  const slicedData = data.slice(1);
   const headers = [
     { label: "Date", key: "date" },
     { label: "총 저울 측정값", key: "totalScale" },
@@ -33,13 +34,14 @@ const ScaleTable = () => {
     { label: "마리당 무게", key: "scalePerAnimal" },
   ];
 
-  const csvData = [
-    { date: "2021-04-01", totalScale: 100, aiScale: 200, scalePerAnimal: 300 },
-    { date: "2021-04-02", totalScale: 200, aiScale: 300, scalePerAnimal: 400 },
-    { date: "2021-04-03", totalScale: 300, aiScale: 400, scalePerAnimal: 500 },
-    { date: "2021-04-04", totalScale: 400, aiScale: 500, scalePerAnimal: 600 },
-    { date: "2021-04-05", totalScale: 500, aiScale: 600, scalePerAnimal: 700 },
-  ];
+  const csvData = slicedData.map(
+    ([date, totalScale, aiScale, scalePerAnimal]) => ({
+      date,
+      totalScale,
+      aiScale,
+      scalePerAnimal,
+    })
+  );
 
   const onClickPrint = () => {
     handlePrint();

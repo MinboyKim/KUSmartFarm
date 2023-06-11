@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: "KorailRoundGothicMedium";
 }
 
 .App-logo {
@@ -52,6 +53,37 @@
   src: url("./fonts/SB-Agro-M.ttf");
 }
 
+@font-face {
+  font-family: "KorailCondensed";
+  src: url("./fonts/korail_Condensed.ttf");
+}
+
+@font-face {
+  font-family: "KorailRoundGothicBold";
+  src: url("./fonts/Korail_Round_Gothic_Bold.ttf");
+}
+
+@font-face {
+  font-family: "KorailRoundGothicLight";
+  src: url("./fonts/Korail_Round_Gothic_Light.ttf");
+}
+
+@font-face {
+  font-family: "KorailRoundGothicMedium";
+  src: url("./fonts/Korail_Round_Gothic_Medium.ttf");
+}
+
+@font-face {
+  font-family: "Korail";
+  src: url("./fonts/KORAIL.ttf");
+}
+
 button {
   cursor: pointer;
+  font-family: "KorailRoundGothicBold";
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+button:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }

@@ -3,7 +3,9 @@
   width: 80px;
   height: 80px;
   margin: 0 auto;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 30%;
   border: 1px solid #ddd;
   background-color: white;
@@ -31,6 +33,11 @@
   color: white;
   font-size: 3px;
 }
+
+.text p:first-child {
+  margin-top: 10px;
+}
+
 .list :hover {
   background-color: lightgreen;
 }

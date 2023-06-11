@@ -26,6 +26,7 @@ const SensorTable = () => {
     height: "100%",
   };
 
+  const slicedData = data.slice(1);
   const headers = [
     { label: "Date", key: "date" },
     { labe: "CO2", key: "co2" },
@@ -35,48 +36,16 @@ const SensorTable = () => {
     { label: "습도", key: "humidity" },
   ];
 
-  const csvData = [
-    {
-      date: "2021-04-01",
-      co2: 100,
-      nh3: 200,
-      h2s: 300,
-      temperature: 400,
-      humidity: 500,
-    },
-    {
-      date: "2021-04-02",
-      co2: 200,
-      nh3: 300,
-      h2s: 400,
-      temperature: 500,
-      humidity: 600,
-    },
-    {
-      date: "2021-04-03",
-      co2: 300,
-      nh3: 400,
-      h2s: 500,
-      temperature: 600,
-      humidity: 700,
-    },
-    {
-      date: "2021-04-04",
-      co2: 400,
-      nh3: 500,
-      h2s: 600,
-      temperature: 700,
-      humidity: 800,
-    },
-    {
-      date: "2021-04-05",
-      co2: 500,
-      nh3: 600,
-      h2s: 700,
-      temperature: 800,
-      humidity: 900,
-    },
-  ];
+  const csvData = slicedData.map(
+    ([date, co2, nh3, h2s, temperature, humidity]) => ({
+      date,
+      co2,
+      nh3,
+      h2s,
+      temperature,
+      humidity,
+    })
+  );
 
   const onClickPrint = () => {
     handlePrint();

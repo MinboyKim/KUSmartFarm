@@ -4,8 +4,8 @@ const Header = () => {
   return (
     <header className={classes.wrapper}>
       <div className={classes.left}>
-        <img src={require("../../images/char.png")} width="150px"></img>
-        <h1>건국 Smart Farm</h1>
+        {/* <img src={require("../../images/char.png")} width="150px"></img> */}
+        <img src={require("../../images/KULOGO.png")} width="400px"></img>
       </div>
       <div>
         <nav className={classes.gnb}>
