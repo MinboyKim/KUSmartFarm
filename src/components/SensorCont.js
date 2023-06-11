@@ -8,6 +8,7 @@ import Calendar from "react-calendar";
 const SensorCont = () => {
   const [isLoading, setIsLoading] = useState(false);
   async function handleClick(sd, ed) {
+    setIsLoading(true);
     try {
       const response = await axios.get("https://localhost:8080/data", {
         params: {
@@ -20,6 +21,7 @@ const SensorCont = () => {
     } catch (error) {
       console.error("Error occurred:", error);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -53,9 +55,7 @@ const SensorCont = () => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          <div>
-            <SensorChart />
-          </div>
+          <div>{isLoading ? "Loading..." : <SensorChart />}</div>
           <div>
             <button className={classes.btn}>이산화탄소</button>
             <button className={classes.btn}>암모니아</button>
@@ -73,9 +73,7 @@ const SensorCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          <div>
-            <SensorTable />
-          </div>
+          <div>{isLoading ? "Loading..." : <SensorTable />}</div>
         </div>
       </Card>
     </div>
