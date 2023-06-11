@@ -3,12 +3,12 @@ const path = require("path");
 const app = express();
 const mysql = require("mysql");
 const connection = mysql.createConnection({
-    host: "114.70.22.49", // 데이터베이스 서버 주소
-    user: "inpro123", // 마리아DB 사용자 이름
-    password: "Rjsrnrtmakxmvka123@", // 마리아DB 암호
-    database: "KU", // 데이터베이스 이름
-    port: 3306 // 포트 번호 (기본값: 3306)
-  });
+  host: "114.70.22.49", // 데이터베이스 서버 주소
+  user: "inpro123", // 마리아DB 사용자 이름
+  password: "Rjsrnrtmakxmvka123@", // 마리아DB 암호
+  database: "KU", // 데이터베이스 이름
+  port: 3306, // 포트 번호 (기본값: 3306)
+});
 
 /*
 REQ
@@ -35,6 +35,7 @@ connection.connect(function (err) {
   console.log("Connected to database as id " + connection.threadId);
 });
 
+
 app.get('/data', (req, res) => {
     var sd= req.param("startDate");
     var ed = req.param("endDate");
@@ -57,6 +58,10 @@ app.get('/data', (req, res) => {
       res.json(results);
     });
   });
+
+
+  // MySQL 쿼리 작성
+  const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
 
 
   app.get('/data2', (req, res) => {
@@ -85,6 +90,10 @@ app.get('/data', (req, res) => {
 
 app.use(express.static(path.join(__dirname, "build")));
 
+
+
+
+app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
