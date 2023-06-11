@@ -3,12 +3,12 @@ const path = require("path");
 const app = express();
 const mysql = require("mysql");
 const connection = mysql.createConnection({
-    host: "114.70.22.49", // 데이터베이스 서버 주소
-    user: "inpro123", // 마리아DB 사용자 이름
-    password: "Rjsrnrtmakxmvka123@", // 마리아DB 암호
-    database: "KU", // 데이터베이스 이름
-    port: 3306 // 포트 번호 (기본값: 3306)
-  });
+  host: "114.70.22.49", // 데이터베이스 서버 주소
+  user: "inpro123", // 마리아DB 사용자 이름
+  password: "Rjsrnrtmakxmvka123@", // 마리아DB 암호
+  database: "KU", // 데이터베이스 이름
+  port: 3306, // 포트 번호 (기본값: 3306)
+});
 
 /*
 REQ
@@ -35,29 +35,28 @@ connection.connect(function (err) {
   console.log("Connected to database as id " + connection.threadId);
 });
 
-app.get('/data/:startDate/:endDate', (req, res) => {
-    const startDate = req.params.startDate;
-    const endDate = req.params.endDate;
-  
-    // MySQL 쿼리 작성
-    const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
-  
-    // MySQL 쿼리 실행
-    connection.query(query, [startDate, endDate], (err, results) => {  //startDate와 endDate가 ? 자리에 들어간다.
-      if (err) {
-        console.error('Error executing query: ' + err.stack);
-        res.status(500).json({ error: 'Internal Server Error' });
-        return;
-      }
-  
-      // 쿼리 결과를 JSON 형태로 반환
-      res.json(results);
-    });
-  });
+app.get("/data/:startDate/:endDate", (req, res) => {
+  const startDate = req.params.startDate;
+  const endDate = req.params.endDate;
 
+  // MySQL 쿼리 작성
+  const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE WRT_DATE BETWEEN ? AND ?`;
+
+  // MySQL 쿼리 실행
+  connection.query(query, [startDate, endDate], (err, results) => {
+    //startDate와 endDate가 ? 자리에 들어간다.
+    if (err) {
+      console.error("Error executing query: " + err.stack);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+
+    // 쿼리 결과를 JSON 형태로 반환
+    res.json(results);
+  });
+});
 
 app.use(express.static(path.join(__dirname, "build")));
-
 
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "build", "index.html"));
