@@ -3,26 +3,50 @@ import SensorChart from "./SensorChart";
 import SensorTable from "./SensorTable";
 import classes from "../css/Main.module.css";
 import axios from "axios";
+import Calendar from "react-calendar";
 
 const SensorCont = () => {
-  const handleClick = () => {
-    axios
-      .get("https://localhost:8080/data", {
+  const [isLoading, setIsLoading] = useState(false);
+  async function handleClick(sd, ed) {
+    try {
+      const response = await axios.get("https://localhost:8080/data", {
         params: {
-          startDate: 20220228,
-          endDate: 20220305,
+          startDate: sd,
+          endDate: ed,
         },
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
       });
-  };
+
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error occurred:", error);
+    }
+  }
 
   return (
     <div>
+      <Card>
+        <div className={classes.dateWrapper}>
+          <div>
+            <button className={classes.btn}>1개월</button>
+            <button className={classes.btn}>지난달</button>
+            <button className={classes.btn} onClick={handleButtonClick}>
+              {calenderVisibility ? "기간" : "기간 "}
+            </button>
+            {calenderVisibility && (
+              <div
+                style={{
+                  position: "absolute",
+                }}
+              >
+                <div className={classes.Calendar}>
+                  <Calendar />
+                </div>
+              </div>
+            )}
+          </div>
+          <button>조회</button>
+        </div>
+      </Card>
       <Card>
         <div className={classes.graphWrapper}>
           <div>
