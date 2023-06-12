@@ -5,8 +5,8 @@
     border: 1px solid #eeeeee;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px #e0e0e0;
+    border-radius: 25px;
+    box-shadow: 0px 10px 20px #e0e0e0;
   }
   
   .react-calendar--doubleView {
@@ -114,7 +114,7 @@
   }
   
   .react-calendar__tile--now {
-    background: #ef5350;
+    background: #36a0dd;
     color: #fafafa;
   }
   

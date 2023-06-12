@@ -14,8 +14,6 @@ const SensorCont = () => {
   const [endDate, setEndDate] = useState(""); // 종료 날짜 상태 변수
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
-  const [selectedRange, setSelectedRange] = useState([null, null]);
-
   const [chartData, setChartData] = useState([]);
 
   const clickOneMonth = (event) => {
@@ -63,7 +61,15 @@ const SensorCont = () => {
   const check = () => {
     console.log(startDate, endDate);
     handleClick(startDate, endDate);
-  };
+};
+
+const formatDate = (date) => {
+  console.log(date);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}${month}${day}`;
+};
 
   async function handleClick(sd, ed) {
     setIsLoading(true);
@@ -136,13 +142,6 @@ const SensorCont = () => {
     return averages;
   }
 
-  const formatDate = (date) => {
-    console.log(date);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}${month}${day}`;
-  };
 
   return (
     <div>
