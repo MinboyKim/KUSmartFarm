@@ -60,8 +60,9 @@ const ScaleCont = () => {
   };
 
   const check = () => {
+    setCalenderVisibility(false);
     console.log(startDate, endDate);
-    handleClick(startDate, endDate);
+    //handleClick(startDate, endDate);
   };
 
   const formatDate = (date) => {
