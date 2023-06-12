@@ -15,7 +15,6 @@ const SensorCont = () => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
   const [selectedRange, setSelectedRange] = useState([null, null]);
- 
 
   const clickOneMonth = (event) => {
     const today = new Date();
@@ -48,6 +47,7 @@ const SensorCont = () => {
     setCalenderVisibility(!calenderVisibility);
   };
 
+
 const onChangeCalender = e => {
     // event를 받아서 yyyy/mm/dd 형식으로 일자를 포맷팅해줌
     // e[0]은 사용자가 여행 일자로 선택한 시작 일자가 들어감
@@ -57,9 +57,8 @@ const onChangeCalender = e => {
 	// 여행 시작일자와 마치는일자의 값이 변할 때마다 값을 다시 세팅해줌
     setStartDate(startDateFormat);
     setEndDate(endDateFormat);
+
   };
-
-
 
   const check = () => {
     console.log(startDate, endDate);
@@ -87,26 +86,50 @@ const onChangeCalender = e => {
   const formatDate = (date) => {
     console.log(date);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}${month}${day}`;
   };
-
 
   return (
     <div>
       <Card>
         <div className={classes.dateWrapper}>
           <div>
-            <button className={classes.btn} onClick={clickOneMonth}   style={{
-    backgroundColor: selectedButton === "b1" ? "rgb(184, 243, 41)" : "rgb(255, 255, 255)",
-  }}>1개월</button>
-            <button className={classes.btn} onClick={clickLastMonth} style={{
-    backgroundColor: selectedButton === "b2" ? "rgb(184, 243, 41)" : "rgb(255, 255, 255)",
-  }}>지난달</button>
-            <button className={classes.btn} onClick={handleButtonClick} style={{
-    backgroundColor: selectedButton === "b3" ? "rgb(184, 243, 41)" : "rgb(255, 255, 255)",
-  }}>
+            <button
+              className={classes.btn}
+              onClick={clickOneMonth}
+              style={{
+                backgroundColor:
+                  selectedButton === "b1"
+                    ? "rgb(184, 243, 41)"
+                    : "rgb(255, 255, 255)",
+              }}
+            >
+              1개월
+            </button>
+            <button
+              className={classes.btn}
+              onClick={clickLastMonth}
+              style={{
+                backgroundColor:
+                  selectedButton === "b2"
+                    ? "rgb(184, 243, 41)"
+                    : "rgb(255, 255, 255)",
+              }}
+            >
+              지난달
+            </button>
+            <button
+              className={classes.btn}
+              onClick={handleButtonClick}
+              style={{
+                backgroundColor:
+                  selectedButton === "b3"
+                    ? "rgb(184, 243, 41)"
+                    : "rgb(255, 255, 255)",
+              }}
+            >
               {calenderVisibility ? "기간" : "기간 "}
             </button>
             {calenderVisibility && (
@@ -153,7 +176,9 @@ const onChangeCalender = e => {
         <button onClick={handleClick} className={classes.btn}>
           전체 센서 조회
         </button>
-        <button className={classes.btn} onClick={check}>시간대별 조회</button>
+        <button className={classes.btn} onClick={check}>
+          시간대별 조회
+        </button>
       </div>
       <Card>
         <div className={classes.tableWrapper}>
