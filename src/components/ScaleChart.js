@@ -90,16 +90,16 @@ const ScaleChart = ({ data }) => {
 
   ];
 
-  const chartContainerRef = useRef(null);
+//   const chartContainerRef = useRef(null);
 
-  useEffect(() => {
-    const chartContainer = chartContainerRef.current;
-    const chartElement = chartContainer.getElementsByTagName('svg')[0];
+//   useEffect(() => {
+//     const chartContainer = chartContainerRef.current;
+//     const chartElement = chartContainer.getElementsByTagName('svg')[0];
     
-    if (chartElement && chartElement.scrollWidth > chartContainer.offsetWidth) {
-      chartContainer.style.overflowX = 'scroll';
-    }
-  }, []);
+//     if (chartElement && chartElement.scrollWidth > chartContainer.offsetWidth) {
+//       chartContainer.style.overflowX = 'scroll';
+//     }
+//   }, []);
 
 
 
@@ -122,8 +122,8 @@ const ScaleChart = ({ data }) => {
   };
 
   return (
-    <div ref={chartContainerRef} >
-      <Chart chartType="Line" data={data2} options={options} />
+    <div>
+      <Chart chartType="Line" data={data} options={options} />
     </div>
   );
 };

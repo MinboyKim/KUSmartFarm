@@ -59,9 +59,8 @@ const ScaleCont = () => {
   };
 
   const check = () => {
-    setCalenderVisibility(false);
     console.log(startDate, endDate);
-    //handleClick(startDate, endDate);
+    handleClick(startDate, endDate);
   };
 
   const formatDate = (date) => {
@@ -216,7 +215,7 @@ const ScaleCont = () => {
             <ScaleChart data={chartData} />
           )}
           {!isLoading && chartData.length === 0 && "Found no data"}
-          {isLoading && "Loading..."}
+          {isLoading && "Loading…"}
         </div>
       </Card>
       <div className={classes.show}>
@@ -229,7 +228,7 @@ const ScaleCont = () => {
             <ScaleTable data={chartData} />
           )}
           {!isLoading && chartData.length === 0 && "Found no data"}
-          {isLoading && "Loading..."}
+          {isLoading && "Loading…"}
         </div>
       </Card>
     </div>
