@@ -8,7 +8,6 @@ import Calendar from "react-calendar";
 import myCalendar from "../css/MyCalender.css";
 import moment from "moment";
 
-
 const ScaleCont = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
@@ -71,7 +70,6 @@ const ScaleCont = () => {
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}${month}${day}`;
   };
-  
 
   async function handleClick(sd, ed) {
     setIsLoading(true);
@@ -120,9 +118,9 @@ const ScaleCont = () => {
       }
 
       groups[WRT_DATE].count++;
-      groups[WRT_DATE].sumTOTAL_SCALE += obj.TOTAL_SCALE;
-      groups[WRT_DATE].sumAI_SCALE += obj.AI_SCALE;
-      groups[WRT_DATE].sumSCALE_PER_ANIMAL += obj.SCALE_PER_ANIMAL;
+      groups[WRT_DATE].sumTOTAL_SCALE += +obj.SCALE_DATA.toFixed(3);
+      groups[WRT_DATE].sumAI_SCALE += +obj.COUNT_DATA.toFixed(3);
+      groups[WRT_DATE].sumSCALE_PER_ANIMAL += +obj.WEIGHT_DATA.toFixed(3);
     }
 
     const averages = [];
@@ -132,22 +130,20 @@ const ScaleCont = () => {
 
       averages.push({
         WRT_DATE: key,
-        TOTAL_SCALE: group.sumTOTAL_SCALE / count,
-        AI_SCALE: group.sumAI_SCALE / count,
-        SCALE_PER_ANIMAL: group.sumSCALE_PER_ANIMAL / count,
+        TOTAL_SCALE: +(group.sumTOTAL_SCALE / count).toFixed(3),
+        AI_SCALE: +(group.sumAI_SCALE / count).toFixed(3),
+        SCALE_PER_ANIMAL: +(group.sumSCALE_PER_ANIMAL / count).toFixed(3),
       });
     }
 
     return averages;
   }
 
-
-
   return (
     <div>
       <Card>
         <div className={classes.dateWrapper}>
-        <div>
+          <div>
             <button
               className={classes.btn}
               onClick={clickOneMonth}
@@ -215,7 +211,11 @@ const ScaleCont = () => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          {isLoading ? "Loading..." : <ScaleChart data={chartData} />}
+          {!isLoading && chartData.length > 0 && (
+            <ScaleChart data={chartData} />
+          )}
+          {!isLoading && chartData.length === 0 && "Found no data"}
+          {isLoading && "Loading..."}
         </div>
       </Card>
       <div className={classes.show}>
@@ -224,7 +224,11 @@ const ScaleCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {isLoading ? "Loading..." : <ScaleTable data={chartData} />}
+          {!isLoading && chartData.length > 0 && (
+            <ScaleTable data={chartData} />
+          )}
+          {!isLoading && chartData.length === 0 && "Found no data"}
+          {isLoading && "Loading..."}
         </div>
       </Card>
     </div>

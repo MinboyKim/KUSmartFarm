@@ -7,6 +7,7 @@ import Calendar from "react-calendar";
 import myCalendar from "../css/MyCalender.css";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import { set } from "date-fns";
 
 const SensorCont = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -61,15 +62,15 @@ const SensorCont = () => {
   const check = () => {
     console.log(startDate, endDate);
     handleClick(startDate, endDate);
-};
+  };
 
-const formatDate = (date) => {
-  console.log(date);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}${month}${day}`;
-};
+  const formatDate = (date) => {
+    console.log(date);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}${month}${day}`;
+  };
 
   async function handleClick(sd, ed) {
     setIsLoading(true);
@@ -117,11 +118,11 @@ const formatDate = (date) => {
       }
 
       groups[WRT_DATE].count++;
-      groups[WRT_DATE].sumCO2 += obj.CO2_DATA;
-      groups[WRT_DATE].sumH2S += obj.H2S_DATA;
-      groups[WRT_DATE].sumNH3 += obj.NH3_DATA;
-      groups[WRT_DATE].sumHUMT += obj.HUMT_DATA;
-      groups[WRT_DATE].sumTEMP += obj.TEMP_DATA;
+      groups[WRT_DATE].sumCO2 += +obj.CO2_DATA.toFixed(2);
+      groups[WRT_DATE].sumH2S += +obj.H2S_DATA.toFixed(2);
+      groups[WRT_DATE].sumNH3 += +obj.NH3_DATA.toFixed(2);
+      groups[WRT_DATE].sumHUMT += +obj.HUMT_DATA.toFixed(2);
+      groups[WRT_DATE].sumTEMP += +obj.TEMP_DATA.toFixed(2);
     }
 
     const averages = [];
@@ -131,17 +132,16 @@ const formatDate = (date) => {
 
       averages.push({
         WRT_DATE: key,
-        AVG_CO2: group.sumCO2 / count,
-        AVG_NH3: group.sumNH3 / count,
-        AVG_H2S: group.sumH2S / count,
-        AVG_HUMT: group.sumHUMT / count,
-        AVG_TEMP: group.sumTEMP / count,
+        AVG_CO2: +(group.sumCO2 / count).toFixed(3),
+        AVG_NH3: +(group.sumNH3 / count).toFixed(3),
+        AVG_H2S: +(group.sumH2S / count).toFixed(3),
+        AVG_HUMT: +(group.sumHUMT / count).toFixed(3),
+        AVG_TEMP: +(group.sumTEMP / count).toFixed(3),
       });
     }
 
     return averages;
   }
-
 
   return (
     <div>
@@ -215,7 +215,11 @@ const formatDate = (date) => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          {isLoading ? "Loading..." : <SensorChart data={chartData} />}
+          {!isLoading && chartData.length > 0 && (
+            <SensorChart data={chartData} />
+          )}
+          {!isLoading && chartData.length === 0 && "Found no data"}
+          {isLoading && "Loading..."}
           <div className={classes.graphWrapper__btn}>
             <button className={classes.btn}>이산화탄소</button>
             <button className={classes.btn}>암모니아</button>
@@ -233,7 +237,11 @@ const formatDate = (date) => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {isLoading ? "Loading..." : <SensorTable data={chartData} />}
+          {!isLoading && chartData.length > 0 && (
+            <SensorTable data={chartData} />
+          )}
+          {!isLoading && chartData.length === 0 && "Found no data"}
+          {isLoading && "Loading..."}
         </div>
       </Card>
     </div>
