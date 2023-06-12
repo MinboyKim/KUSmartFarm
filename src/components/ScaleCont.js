@@ -97,6 +97,7 @@ const ScaleCont = () => {
         "마리당 무게",
       ]);
       setChartData(chartArray);
+      console.log(chartData);
     } catch (error) {
       console.error("Error occurred:", error);
     }
