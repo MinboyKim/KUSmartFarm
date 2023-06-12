@@ -4,9 +4,8 @@ import SensorTable from "./SensorTable";
 import classes from "../css/Main.module.css";
 import axios from "axios";
 import Calendar from "react-calendar";
-//import { Calendar } from 'react-date-range';
-import 'react-calendar/dist/Calendar.css'
-import { useState } from "react";
+import myCalendar from "../css/MyCalender.css";
+import { useEffect,useState } from "react";
 import moment from "moment";
 
 const SensorCont = () => {
@@ -49,26 +48,29 @@ const SensorCont = () => {
     setCalenderVisibility(!calenderVisibility);
   };
 
-const onChangeCalender = (date) => {
-    // const selectedStartDate = moment(e[0]).format("YYYYMMDD");
-    // const selectedEndDate = moment(e[1]).format("YYYYMMDD");
-    setSelectedRange(date);
-    setStartDate(selectedRange[0]);
-    setEndDate(selectedRange[1]);
+const onChangeCalender = e => {
+    // event를 받아서 yyyy/mm/dd 형식으로 일자를 포맷팅해줌
+    // e[0]은 사용자가 여행 일자로 선택한 시작 일자가 들어감
+    // e[1]은 사용자가 여행 마치는 일자로 선택한 일자가 들어감 
+    const startDateFormat = moment(e[0]).format("YYYYMMDD");
+    const endDateFormat = moment(e[1]).format("YYYYMMDD");
+	// 여행 시작일자와 마치는일자의 값이 변할 때마다 값을 다시 세팅해줌
+    setStartDate(startDateFormat);
+    setEndDate(endDateFormat);
   };
 
 
 
   const check = () => {
     console.log(startDate, endDate);
-    //handleClick(startDate, endDate);
+    handleClick(startDate, endDate);
   }
 
 
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const response = await axios.get("https://localhost:8080/data", {
+      const response = await axios.get("http://localhost:8080/data", {
         params: {
           startDate: sd,
           endDate: ed,
@@ -115,7 +117,8 @@ const onChangeCalender = (date) => {
               >
                 <div className={classes.Calendar}>
                   <Calendar onChange={onChangeCalender}
-
+                   selectRange={true} 
+                   formatDay={(locale, date) => moment(date).format("DD")} 
                     // selectRange={true}
                     // nextLabel={<NextIcon />}
                     // prevLabel={<PrevIcon />}
