@@ -64,7 +64,7 @@ const SensorCont = () => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const response = await axios.get("https://localhost:8080/data", {
+      const response = await axios.get("http://localhost:8080/data", {
         params: {
           startDate: sd,
           endDate: ed,
