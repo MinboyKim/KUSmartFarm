@@ -41,6 +41,42 @@ const ScaleCont = () => {
     setIsLoading(false);
   }
 
+  function calculateAverages(data) {
+    const groups = {};
+
+    for (const obj of data) {
+      const { WRT_DATE } = obj;
+      if (!groups[WRT_DATE]) {
+        groups[WRT_DATE] = {
+          count: 0,
+          sumTOTAL_SCALE: 0,
+          sumAI_SCALE: 0,
+          sumSCALE_PER_ANIMAL: 0,
+        };
+      }
+
+      groups[WRT_DATE].count++;
+      groups[WRT_DATE].sumTOTAL_SCALE += obj.TOTAL_SCALE;
+      groups[WRT_DATE].sumAI_SCALE += obj.AI_SCALE;
+      groups[WRT_DATE].sumSCALE_PER_ANIMAL += obj.SCALE_PER_ANIMAL;
+    }
+
+    const averages = [];
+    for (const key in groups) {
+      const group = groups[key];
+      const { count } = group;
+
+      averages.push({
+        WRT_DATE: key,
+        TOTAL_SCALE: group.sumTOTAL_SCALE / count,
+        AI_SCALE: group.sumAI_SCALE / count,
+        SCALE_PER_ANIMAL: group.sumSCALE_PER_ANIMAL / count,
+      });
+    }
+
+    return averages;
+  }
+
   return (
     <div>
       <Card>
@@ -48,9 +84,10 @@ const ScaleCont = () => {
           <div>
             <button className={classes.btn}>1개월</button>
             <button className={classes.btn}>지난달</button>
-            <button className={classes.btn} onClick={handleButtonClick}>
-              {calenderVisibility ? "기간" : "기간 "}
-            </button>
+            <button
+              className={classes.btn}
+              onClick={handleButtonClick}
+            ></button>
             {calenderVisibility && (
               <div
                 style={{
@@ -72,7 +109,7 @@ const ScaleCont = () => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          {isLoading ? "Loading..." : <ScaleChart />}
+          {isLoading ? "Loading..." : <ScaleChart data={chartData} />}
         </div>
       </Card>
       <div className={classes.show}>
@@ -81,7 +118,7 @@ const ScaleCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {isLoading ? "Loading..." : <ScaleTable />}
+          {isLoading ? "Loading..." : <ScaleTable data={chartData} />}
         </div>
       </Card>
     </div>
