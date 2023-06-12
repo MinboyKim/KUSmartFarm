@@ -5,7 +5,7 @@ import classes from "../css/Main.module.css";
 import axios from "axios";
 import Calendar from "react-calendar";
 import myCalendar from "../css/MyCalender.css";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 
 const SensorCont = () => {
@@ -15,6 +15,12 @@ const SensorCont = () => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
   const [selectedRange, setSelectedRange] = useState([null, null]);
+
+  const [averages, setAverages] = useState([]);
+
+  useEffect(() => {
+    console.log(averages);
+  }, [averages]);
 
   const clickOneMonth = (event) => {
     const today = new Date();
@@ -47,24 +53,21 @@ const SensorCont = () => {
     setCalenderVisibility(!calenderVisibility);
   };
 
-
-const onChangeCalender = e => {
+  const onChangeCalender = (e) => {
     // event를 받아서 yyyy/mm/dd 형식으로 일자를 포맷팅해줌
     // e[0]은 사용자가 여행 일자로 선택한 시작 일자가 들어감
-    // e[1]은 사용자가 여행 마치는 일자로 선택한 일자가 들어감 
+    // e[1]은 사용자가 여행 마치는 일자로 선택한 일자가 들어감
     const startDateFormat = moment(e[0]).format("YYYYMMDD");
     const endDateFormat = moment(e[1]).format("YYYYMMDD");
-	// 여행 시작일자와 마치는일자의 값이 변할 때마다 값을 다시 세팅해줌
+    // 여행 시작일자와 마치는일자의 값이 변할 때마다 값을 다시 세팅해줌
     setStartDate(startDateFormat);
     setEndDate(endDateFormat);
-
   };
 
   const check = () => {
     console.log(startDate, endDate);
     handleClick(startDate, endDate);
-  }
-
+  };
 
   async function handleClick(sd, ed) {
     setIsLoading(true);
@@ -76,11 +79,68 @@ const onChangeCalender = e => {
         },
       });
 
-      console.log(response.data);
+      const chartAverage = calculateAverages(response.data);
+      const chartData = chartAverage.map((obj) => {
+        return [
+          obj.WRT_DATE,
+          obj.AVG_CO2,
+          obj.AVG_NH3,
+          obj.AVG_H2S,
+          obj.AVG_HUMT,
+          obj.AVG_TEMP,
+        ];
+      });
+      chartData.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
+      setAverages(chartData);
     } catch (error) {
       console.error("Error occurred:", error);
     }
     setIsLoading(false);
+  }
+
+  // WRT_DATE를 기준으로 그룹화하여 평균을 계산하는 함수
+  function calculateAverages(data) {
+    const groups = {};
+
+    // 주어진 데이터를 그룹화
+    for (const obj of data) {
+      const { WRT_DATE } = obj;
+      if (!groups[WRT_DATE]) {
+        groups[WRT_DATE] = {
+          count: 0,
+          sumCO2: 0,
+          sumNH3: 0,
+          sumHUMT: 0,
+          sumTEMP: 0,
+          sumH2S: 0,
+        };
+      }
+
+      groups[WRT_DATE].count++;
+      groups[WRT_DATE].sumCO2 += obj.CO2_DATA;
+      groups[WRT_DATE].sumH2S += obj.H2S_DATA;
+      groups[WRT_DATE].sumNH3 += obj.NH3_DATA;
+      groups[WRT_DATE].sumHUMT += obj.HUMT_DATA;
+      groups[WRT_DATE].sumTEMP += obj.TEMP_DATA;
+    }
+
+    // 평균 계산 후 결과 배열에 저장
+    const averages = [];
+    for (const key in groups) {
+      const group = groups[key];
+      const { count } = group;
+
+      averages.push({
+        WRT_DATE: key,
+        AVG_CO2: group.sumCO2 / count,
+        AVG_NH3: group.sumNH3 / count,
+        AVG_H2S: group.sumH2S / count,
+        AVG_HUMT: group.sumHUMT / count,
+        AVG_TEMP: group.sumTEMP / count,
+      });
+    }
+
+    return averages;
   }
 
   const formatDate = (date) => {
@@ -139,9 +199,10 @@ const onChangeCalender = e => {
                 }}
               >
                 <div className={classes.Calendar}>
-                  <Calendar onChange={onChangeCalender}
-                   selectRange={true} 
-                   formatDay={(locale, date) => moment(date).format("DD")} 
+                  <Calendar
+                    onChange={onChangeCalender}
+                    selectRange={true}
+                    formatDay={(locale, date) => moment(date).format("DD")}
                     // selectRange={true}
                     // nextLabel={<NextIcon />}
                     // prevLabel={<PrevIcon />}
@@ -162,7 +223,7 @@ const onChangeCalender = e => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          {isLoading ? "Loading..." : <SensorChart />}
+          {isLoading ? "Loading..." : <SensorChart data={averages} />}
           <div className={classes.graphWrapper__btn}>
             <button className={classes.btn}>이산화탄소</button>
             <button className={classes.btn}>암모니아</button>
@@ -173,9 +234,7 @@ const onChangeCalender = e => {
         </div>
       </Card>
       <div className={classes.show}>
-        <button onClick={handleClick} className={classes.btn}>
-          전체 센서 조회
-        </button>
+        <button className={classes.btn}>전체 센서 조회</button>
         <button className={classes.btn} onClick={check}>
           시간대별 조회
         </button>
