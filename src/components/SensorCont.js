@@ -60,6 +60,7 @@ const SensorCont = () => {
   };
 
   const check = () => {
+    setCalenderVisibility(false);
     console.log(startDate, endDate);
     handleClick(startDate, endDate);
   };
