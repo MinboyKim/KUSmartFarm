@@ -25,29 +25,6 @@ const Scale = (props) => {
         <div className={Container.container}>
           <Nav />
           <main className={classes.main}>
-            <Card>
-              <div className={classes.dateWrapper}>
-                <div>
-                  <button className={classes.btn}>1개월</button>
-                  <button className={classes.btn}>지난달</button>
-                  <button className={classes.btn} onClick={handleButtonClick}>
-                    {calenderVisibility ? "기간" : "기간 "}
-                  </button>
-                  {calenderVisibility && (
-                    <div
-                      style={{
-                        position: "absolute",
-                      }}
-                    >
-                      <div className={classes.Calendar}>
-                        <Calendar />
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <button>조회</button>
-              </div>
-            </Card>
             <ScaleCont />
           </main>
         </div>

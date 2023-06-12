@@ -3,11 +3,69 @@ import ScaleChart from "./ScaleChart";
 import ScaleTable from "./ScaleTable";
 import classes from "../css/Main.module.css";
 import { useState } from "react";
+import axios from "axios";
 
 const ScaleCont = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [chartData, setChartData] = useState([]);
+
+  async function handleClick(sd, ed) {
+    setIsLoading(true);
+    try {
+      const response = await axios.get("http://localhost:8080/data2", {
+        params: {
+          startDate: sd,
+          endDate: ed,
+        },
+      });
+
+      const averages = calculateAverages(response.data);
+      const chartArray = averages.map((obj) => {
+        return [
+          obj.WRT_DATE,
+          obj.TOTAL_SCALE,
+          obj.AI_SCALE,
+          obj.SCALE_PER_ANIMAL,
+        ];
+      });
+      chartArray.unshift([
+        "Date",
+        "총 저울 측정값",
+        "AI 분석 마릿수",
+        "마리당 무게",
+      ]);
+      setChartData(chartArray);
+    } catch (error) {
+      console.error("Error occurred:", error);
+    }
+    setIsLoading(false);
+  }
+
   return (
     <div>
+      <Card>
+        <div className={classes.dateWrapper}>
+          <div>
+            <button className={classes.btn}>1개월</button>
+            <button className={classes.btn}>지난달</button>
+            <button className={classes.btn} onClick={handleButtonClick}>
+              {calenderVisibility ? "기간" : "기간 "}
+            </button>
+            {calenderVisibility && (
+              <div
+                style={{
+                  position: "absolute",
+                }}
+              >
+                <div className={classes.Calendar}>
+                  <Calendar />
+                </div>
+              </div>
+            )}
+          </div>
+          <button>조회</button>
+        </div>
+      </Card>
       <Card>
         <div className={classes.graphWrapper}>
           <div className={classes.graphWrapper__header}>

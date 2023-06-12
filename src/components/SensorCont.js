@@ -16,11 +16,7 @@ const SensorCont = () => {
   const [selectedButton, setSelectedButton] = useState("");
   const [selectedRange, setSelectedRange] = useState([null, null]);
 
-  const [averages, setAverages] = useState([]);
-
-  useEffect(() => {
-    console.log(averages);
-  }, [averages]);
+  const [chartData, setChartData] = useState([]);
 
   const clickOneMonth = (event) => {
     const today = new Date();
@@ -79,8 +75,8 @@ const SensorCont = () => {
         },
       });
 
-      const chartAverage = calculateAverages(response.data);
-      const chartData = chartAverage.map((obj) => {
+      const averages = calculateAverages(response.data);
+      const chartArray = averages.map((obj) => {
         return [
           obj.WRT_DATE,
           obj.AVG_CO2,
@@ -90,19 +86,17 @@ const SensorCont = () => {
           obj.AVG_TEMP,
         ];
       });
-      chartData.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
-      setAverages(chartData);
+      chartArray.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
+      setChartData(chartArray);
     } catch (error) {
       console.error("Error occurred:", error);
     }
     setIsLoading(false);
   }
 
-  // WRT_DATE를 기준으로 그룹화하여 평균을 계산하는 함수
   function calculateAverages(data) {
     const groups = {};
 
-    // 주어진 데이터를 그룹화
     for (const obj of data) {
       const { WRT_DATE } = obj;
       if (!groups[WRT_DATE]) {
@@ -124,7 +118,6 @@ const SensorCont = () => {
       groups[WRT_DATE].sumTEMP += obj.TEMP_DATA;
     }
 
-    // 평균 계산 후 결과 배열에 저장
     const averages = [];
     for (const key in groups) {
       const group = groups[key];
@@ -223,7 +216,7 @@ const SensorCont = () => {
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
           </div>
-          {isLoading ? "Loading..." : <SensorChart data={averages} />}
+          {isLoading ? "Loading..." : <SensorChart data={chartData} />}
           <div className={classes.graphWrapper__btn}>
             <button className={classes.btn}>이산화탄소</button>
             <button className={classes.btn}>암모니아</button>
@@ -241,7 +234,7 @@ const SensorCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {isLoading ? "Loading..." : <SensorTable />}
+          {isLoading ? "Loading..." : <SensorTable data={chartData} />}
         </div>
       </Card>
     </div>

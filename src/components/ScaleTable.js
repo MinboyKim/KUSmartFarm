@@ -4,16 +4,16 @@ import { useReactToPrint } from "react-to-print";
 import classes from "../css/Main.module.css";
 import { useRef } from "react";
 
-const ScaleTable = () => {
+const ScaleTable = ({ data }) => {
   const ref = useRef();
-  const data = [
-    ["Date", "총 저울 측정값", "AI 분석 마릿수", "마리당 무게"],
-    ["2021-04-01", 100, 200, 300],
-    ["2021-04-02", 200, 300, 400],
-    ["2021-04-03", 300, 400, 500],
-    ["2021-04-04", 400, 500, 600],
-    ["2021-04-05", 500, 600, 700],
-  ];
+  // const data = [
+  //   ["Date", "총 저울 측정값", "AI 분석 마릿수", "마리당 무게"],
+  //   ["2021-04-01", 100, 200, 300],
+  //   ["2021-04-02", 200, 300, 400],
+  //   ["2021-04-03", 300, 400, 500],
+  //   ["2021-04-04", 400, 500, 600],
+  //   ["2021-04-05", 500, 600, 700],
+  // ];
   const options = {
     title: "육계저울 데이터",
     curveType: "function",
@@ -26,7 +26,6 @@ const ScaleTable = () => {
     height: "100%",
   };
 
-  const slicedData = data.slice(1);
   const headers = [
     { label: "Date", key: "date" },
     { label: "총 저울 측정값", key: "totalScale" },
@@ -34,14 +33,12 @@ const ScaleTable = () => {
     { label: "마리당 무게", key: "scalePerAnimal" },
   ];
 
-  const csvData = slicedData.map(
-    ([date, totalScale, aiScale, scalePerAnimal]) => ({
-      date,
-      totalScale,
-      aiScale,
-      scalePerAnimal,
-    })
-  );
+  const csvData = data.map(([date, totalScale, aiScale, scalePerAnimal]) => ({
+    date,
+    totalScale,
+    aiScale,
+    scalePerAnimal,
+  }));
 
   const onClickPrint = () => {
     handlePrint();
