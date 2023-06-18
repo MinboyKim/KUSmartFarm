@@ -77,17 +77,6 @@ const ScaleCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-<<<<<<< HEAD
-      const response = await axios.get(
-        "http://kusmartfarm.synology.me:8080/data2",
-        {
-          params: {
-            startDate: sd,
-            endDate: ed,
-          },
-        }
-      );
-=======
         const dataLink="http://localhost:8080/scaleData"+scaleNum
         
         const response = await axios.get(dataLink, {
@@ -96,7 +85,6 @@ const ScaleCont = (props) => {
           endDate: ed,
         },
       });
->>>>>>> a8f0e4a184ccc58f30218eaa3ce7c02022ec718b
 
       const averages = calculateAverages(response.data);
       const chartArray = averages.map((obj) => {
