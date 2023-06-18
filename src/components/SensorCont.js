@@ -1,13 +1,16 @@
+import axios from "axios";
+import { set } from "date-fns";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import Calendar from "react-calendar";
+
+import classes from "../css/Main.module.css";
+import myCalendar from "../css/MyCalender.css";
+
 import Card from "./Card";
 import SensorChart from "./SensorChart";
 import SensorTable from "./SensorTable";
-import classes from "../css/Main.module.css";
-import axios from "axios";
-import Calendar from "react-calendar";
-import myCalendar from "../css/MyCalender.css";
-import { useEffect, useState } from "react";
-import moment from "moment";
-import { set } from "date-fns";
+import TestTable from "./TestTable";
 
 const SensorCont = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -76,12 +79,15 @@ const SensorCont = () => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:8080/data", {
-        params: {
-          startDate: sd,
-          endDate: ed,
-        },
-      });
+      const response = await axios.get(
+        "http://kusmartfarm.synology.me:8080/data",
+        {
+          params: {
+            startDate: sd,
+            endDate: ed,
+          },
+        }
+      );
 
       const averages = calculateAverages(response.data);
       const chartArray = averages.map((obj) => {
@@ -238,9 +244,7 @@ const SensorCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {!isLoading && chartData.length > 0 && (
-            <SensorTable data={chartData} />
-          )}
+          {!isLoading && chartData.length > 0 && <TestTable data={chartData} />}
           {!isLoading && chartData.length === 0 && "Found no data"}
           {isLoading && "Loading..."}
         </div>

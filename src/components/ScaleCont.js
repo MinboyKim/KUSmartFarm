@@ -1,12 +1,14 @@
+import axios from "axios";
+import moment from "moment";
+import { useState } from "react";
+import Calendar from "react-calendar";
+
+import classes from "../css/Main.module.css";
+import myCalendar from "../css/MyCalender.css";
+
 import Card from "./Card";
 import ScaleChart from "./ScaleChart";
 import ScaleTable from "./ScaleTable";
-import classes from "../css/Main.module.css";
-import { useState } from "react";
-import axios from "axios";
-import Calendar from "react-calendar";
-import myCalendar from "../css/MyCalender.css";
-import moment from "moment";
 
 const ScaleCont = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -74,12 +76,15 @@ const ScaleCont = () => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:8080/data2", {
-        params: {
-          startDate: sd,
-          endDate: ed,
-        },
-      });
+      const response = await axios.get(
+        "http://kusmartfarm.synology.me:8080/data2",
+        {
+          params: {
+            startDate: sd,
+            endDate: ed,
+          },
+        }
+      );
 
       const averages = calculateAverages(response.data);
       const chartArray = averages.map((obj) => {
