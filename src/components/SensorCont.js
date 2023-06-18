@@ -10,7 +10,8 @@ import myCalendar from "../css/MyCalender.css";
 import Card from "./Card";
 import SensorChart from "./SensorChart";
 import SensorTable from "./SensorTable";
-import TestTable from "./TestTable";
+import SensorAllTable from "./SensorAllTable";
+import SensorTimeTable from "./SensorTimeTable";
 
 const SensorCont = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -244,7 +245,9 @@ const SensorCont = () => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {!isLoading && chartData.length > 0 && <TestTable data={chartData} />}
+          {!isLoading && chartData.length > 0 && (
+            <SensorTimeTable data={chartData} />
+          )}
           {!isLoading && chartData.length === 0 && "Found no data"}
           {isLoading && "Loading..."}
         </div>

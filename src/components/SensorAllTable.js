@@ -1,4 +1,4 @@
-const TestTable = ({ data }) => {
+const SensorAllTable = ({ data }) => {
   return (
     <div>
       <table border={1}>
@@ -48,4 +48,4 @@ const TestTable = ({ data }) => {
   );
 };
 
-export default TestTable;
+export default SensorAllTable;
