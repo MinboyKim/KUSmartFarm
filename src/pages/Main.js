@@ -6,7 +6,7 @@ const Main = () => {
     var id = document.getElementById("id");
     var pwd = document.getElementById("pwd");
     if (id.value === "kusmartfarm" && pwd.value === "kukuku") {
-      window.location.replace("/sensor");
+      window.location.replace("/sensor1");
     } else {
       alert("아이디 또는 비밀번호가 틀렸습니다.");
       id.value = "";

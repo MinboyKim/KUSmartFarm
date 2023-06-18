@@ -29,7 +29,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+
   height: 400px;
 }
 
@@ -49,17 +53,25 @@
   background-color: white;
 }
 
-.graphWrapper div:first-child {
+.graphWrapper div:first-child{
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.graphWrapper div:nth-child(2) {
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.graphWrapper div:first-child h4 {
+.graphWrapper div:nth-child(2) h4 {
   margin-right: 10px;
 }
 
-.graphWrapper div:nth-child(2) {
+.graphWrapper div:nth-child(3) {
   height: 300px;
   display: flex;
   align-items: center;

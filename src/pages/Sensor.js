@@ -11,13 +11,14 @@ import SensorTable from "../components/SensorTable";
 import SensorCont from "../components/SensorCont";
 
 const Sensor = (props) => {
+    const sensorNum = props.sensorNum;
   return (
     <div>
       <Layout>
         <div className={Container.container}>
           <Nav />
           <main className={classes.main}>
-            <SensorCont />
+            <SensorCont sensorNum={sensorNum} />
           </main>
         </div>
       </Layout>

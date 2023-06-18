@@ -9,13 +9,14 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import { set } from "date-fns";
 
-const SensorCont = () => {
+const SensorCont = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
   const [endDate, setEndDate] = useState(""); // 종료 날짜 상태 변수
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
   const [chartData, setChartData] = useState([]);
+  const sensorNum=props.sensorNum;
 
   const clickOneMonth = (event) => {
     const today = new Date();
@@ -72,14 +73,16 @@ const SensorCont = () => {
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}${month}${day}`;
   };
-
+ 
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:8080/data", {
-        params: {
-          startDate: sd,
-          endDate: ed,
+        const dataLink="http://localhost:8080/sensorData"+sensorNum
+        
+        const response = await axios.get(dataLink, {
+         params: {
+            startDate: sd,
+            endDate: ed,
         },
       });
 
@@ -212,6 +215,7 @@ const SensorCont = () => {
       </Card>
       <Card>
         <div className={classes.graphWrapper}>
+        <div>조회 센서 : 센서{sensorNum} </div>
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
             <span>2023-03-20 ~ 2023-04-20</span>
