@@ -13,19 +13,15 @@ import Layout from "./layout/Layout";
 import Nav from "./layout/Nav";
 
 const Scale = (props) => {
-  const [calenderVisibility, setCalenderVisibility] = useState(false);
 
-  const handleButtonClick = () => {
-    setCalenderVisibility(!calenderVisibility);
-  };
-
+  const scaleNum=props.scaleNum;
   return (
     <div>
       <Layout>
         <div className={Container.container}>
           <Nav />
           <main className={classes.main}>
-            <ScaleCont />
+            <ScaleCont scaleNum={scaleNum}/>
           </main>
         </div>
       </Layout>
