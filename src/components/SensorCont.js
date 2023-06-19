@@ -12,8 +12,11 @@ import SensorChart from "./SensorChart";
 import SensorTable from "./SensorTable";
 import SensorAllTable from "./SensorAllTable";
 import SensorTimeTable from "./SensorTimeTable";
-
+import { CSVLink } from "react-csv";
+import { useReactToPrint } from "react-to-print";
+import { useRef } from "react";
 const SensorCont = (props) => {
+    const ref = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
   const [endDate, setEndDate] = useState(""); // 종료 날짜 상태 변수
@@ -23,6 +26,8 @@ const SensorCont = (props) => {
   const [allSensorData, setAllSensorData] = useState([]);
   const [Data, setData] = useState([]);
 
+  const [tableFlag, setTableFlag] = useState(false);
+  const [csvData, setCsvData] = useState([]);
   const sensorNum = props.sensorNum;
 
   const clickOneMonth = (event) => {
@@ -140,17 +145,17 @@ const SensorCont = (props) => {
       allSensorArray.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
       setAllSensorData(allSensorArray);
 
-    //   const csvArray = chartData.map(
-    //     ([date, co2, nh3, h2s, temperature, humidity]) => ({
-    //       date,
-    //       co2,
-    //       nh3,
-    //       h2s,
-    //       temperature,
-    //       humidity,
-    //     })
-    //   );
-    //   setCsvData(csvArray);
+      const csvArray = chartData.map(
+        ([date, co2, nh3, h2s, temperature, humidity]) => ({
+          date,
+          co2,
+          nh3,
+          h2s,
+          temperature,
+          humidity,
+        })
+      );
+      setCsvData(csvArray);
 
 
     } catch (error) {
@@ -200,6 +205,32 @@ const SensorCont = (props) => {
 
     return averages;
   }
+  
+  const headers = [
+    { label: "Date", key: "date" },
+    { labe: "CO2", key: "co2" },
+    { label: "NH3", key: "nh3" },
+    { label: "H2S", key: "h2s" },
+    { label: "온도", key: "temperature" },
+    { label: "습도", key: "humidity" },
+  ];
+
+  const onClickPrint = () => {
+    handlePrint();
+  };
+
+  const handlePrint = useReactToPrint({
+    content: () => ref.current,
+    documentTitle: "환경센서 데이터",
+  });
+
+  const timeClickHandle = () => {
+    setTableFlag(!tableFlag);
+  };
+
+  const allClickHandle = () => {
+    setTableFlag(!tableFlag);
+  };
 
   return (
     <div>
@@ -289,15 +320,43 @@ const SensorCont = (props) => {
         </div>
       </Card>
       <div className={classes.show}>
-        <button className={classes.btn}>전체 센서 조회</button>
-        <button className={classes.btn} onClick={check}>
+      <button className={classes.btn} onClick={allClickHandle}>
+          전체 센서 조회
+        </button>
+        <button className={classes.btn} onClick={timeClickHandle}>
           시간대별 조회
         </button>
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {!isLoading && chartData.length > 0 && (
-            <SensorTimeTable data={allSensorData} />
+        <div className={classes.tableHeader}>
+            <span>
+              환경센서 일별 테이블 {startDate}{startDate && endDate && " ~ "}{endDate}{endDate && " 출력일 : "}
+  {new Date().toLocaleDateString()} 
+            </span>
+            <div>
+              <button
+                onClick={onClickPrint}
+                className={classes.tableHeader__btn}
+              >
+                인쇄
+              </button>
+              <CSVLink
+                data={csvData}
+                headers={headers}
+                filename={"환경센서_CSV_데이터"}
+              >
+                <button className={classes.tableHeader__btn}>
+                  CSV 다운로드
+                </button>
+              </CSVLink>
+            </div>
+          </div>
+          {!isLoading && chartData.length > 0 && tableFlag && (
+            <SensorTimeTable ref={ref} data={chartData} />
+          )}
+          {!isLoading && chartData.length > 0 && !tableFlag && (
+            <SensorAllTable ref={ref} data={chartData} />
           )}
           {!isLoading && chartData.length === 0 && "Found no data"}
           {isLoading && "Loading..."}
