@@ -1,4 +1,5 @@
 const SensorTimeTable = ({ data }) => {
+  console.log(data)
   return (
     <div>
       <table border={1}>
