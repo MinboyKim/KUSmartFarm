@@ -30,9 +30,6 @@ const Nav = (props) => {
               <Link to="/sensor2" className={Navstyle.link2}>
                 센서2
               </Link>
-              <Link to="/sensor3" className={Navstyle.link2}>
-                센서3
-              </Link>
             </ul>
           </Dropdown>
           <li className={Navstyle.list} onClick={handleButtonClick2}>

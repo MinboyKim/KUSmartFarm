@@ -79,27 +79,7 @@ app.get("/sensorData2", (req, res) => {
     });
   });
 
-  app.get("/sensorData3", (req, res) => {
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-    console.log(startDate, endDate);
-  
-    // MySQL 쿼리 작성
-    const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST_BACK WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '003')`;
-  
-    // MySQL 쿼리 실행
-    connection.query(query, [startDate, endDate], (err, results) => {
-      //startDate와 endDate가 ? 자리에 들어간다.
-      if (err) {
-        console.error("Error executing query: " + err.stack);
-        res.status(500).json({ error: "Internal Server Error" });
-        return;
-      }
-  
-      // 쿼리 결과를 JSON 형태로 반환
-      res.json(results);
-    });
-  });
+
 
 // MySQL 쿼리 작성
 

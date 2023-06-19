@@ -22,8 +22,15 @@ const ScaleCont = (props) => {
   const clickOneMonth = (event) => {
     const today = new Date();
     const year = today.getFullYear(); // 현재 년도를 가져옵니다.
-    const month = today.getMonth(); // 현재 월을 가져옵니다.
-    const lastMonthDate = new Date(year, month, -30);
+    var month = today.getMonth(); // 현재 월을 가져옵니다.
+    if(month!=1){
+        month=month-1;
+    }
+    else{
+        month=12;
+    }
+    const day = today.getDate();
+    const lastMonthDate = new Date(year, month, day);
     setStartDate(formatDate(lastMonthDate));
     setEndDate(formatDate(today));
     setSelectedButton("b1");
@@ -216,9 +223,9 @@ const ScaleCont = (props) => {
           <div>조회 저울 : 저울{scaleNum} </div>
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
-            <span>
-              {startDate} ~ {endDate}
-            </span>
+
+            <span>{startDate}{startDate && endDate && "~"}{endDate}</span>
+
           </div>
           {!isLoading && chartData.length > 0 && (
             <ScaleChart data={chartData} />
