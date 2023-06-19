@@ -20,13 +20,21 @@ const SensorCont = (props) => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
   const [chartData, setChartData] = useState([]);
+
   const sensorNum = props.sensorNum;
 
   const clickOneMonth = (event) => {
     const today = new Date();
     const year = today.getFullYear(); // 현재 년도를 가져옵니다.
-    const month = today.getMonth(); // 현재 월을 가져옵니다.
-    const lastMonthDate = new Date(year, month, -30);
+    var month = today.getMonth(); // 현재 월을 가져옵니다.
+    if(month!=1){
+        month=month-1;
+    }
+    else{
+        month=12;
+    }
+    const day = today.getDate();
+    const lastMonthDate = new Date(year, month, day);
     setStartDate(formatDate(lastMonthDate));
     setEndDate(formatDate(today));
     setSelectedButton("b1");
@@ -94,10 +102,20 @@ const SensorCont = (props) => {
       const chartArray = averages.map((obj) => {
         return [
           obj.WRT_DATE,
+          obj.MIN_CO2,
+          obj.MAX_CO2,
           obj.AVG_CO2,
+          obj.MINNH3,
+          obj.MAXNH3,
           obj.AVG_NH3,
+          obj.MINH2S,
+          obj.MAXH2S,
           obj.AVG_H2S,
+          obj.MINHUMT,
+          obj.MAXHUMT,
           obj.AVG_HUMT,
+          obj.MINTEMP,
+          obj.MAXTEMP,
           obj.AVG_TEMP,
         ];
       });
@@ -126,10 +144,24 @@ const SensorCont = (props) => {
       }
 
       groups[WRT_DATE].count++;
+      groups[WRT_DATE].minCO2=Math.min(groups[WRT_DATE].minCO2,+obj.CO2_DATA.toFixed(2));
+      groups[WRT_DATE].maxCO2=Math.max(groups[WRT_DATE].maxCO2,+obj.CO2_DATA.toFixed(2));
       groups[WRT_DATE].sumCO2 += +obj.CO2_DATA.toFixed(2);
+
+      groups[WRT_DATE].minH2S=Math.min(groups[WRT_DATE].minH2S,+obj.H2S_DATA.toFixed(2));
+      groups[WRT_DATE].maxH2S=Math.max(groups[WRT_DATE].maxH2S,+obj.H2S_DATA.toFixed(2));
       groups[WRT_DATE].sumH2S += +obj.H2S_DATA.toFixed(2);
+
+      groups[WRT_DATE].minNH3=Math.min(groups[WRT_DATE].minNH3,+obj.NH3_DATA.toFixed(2));
+      groups[WRT_DATE].maxNH3=Math.max(groups[WRT_DATE].maxNH3,+obj.NH3_DATA.toFixed(2));
       groups[WRT_DATE].sumNH3 += +obj.NH3_DATA.toFixed(2);
+
+      groups[WRT_DATE].minHUMT=Math.min(groups[WRT_DATE].minHUMT,+obj.HUMT_DATA.toFixed(2));
+      groups[WRT_DATE].maxHUMT=Math.max(groups[WRT_DATE].maxHUMT,+obj.HUMT_DATA.toFixed(2));
       groups[WRT_DATE].sumHUMT += +obj.HUMT_DATA.toFixed(2);
+
+      groups[WRT_DATE].minTEMP=Math.min(groups[WRT_DATE].minTEMP,+obj.TEMP_DATA.toFixed(2));
+      groups[WRT_DATE].maxTEMP=Math.max(groups[WRT_DATE].maxTEMP,+obj.TEMP_DATA.toFixed(2));
       groups[WRT_DATE].sumTEMP += +obj.TEMP_DATA.toFixed(2);
     }
 
@@ -139,12 +171,22 @@ const SensorCont = (props) => {
       const { count } = group;
 
       averages.push({
-        WRT_DATE: key,
-        AVG_CO2: +(group.sumCO2 / count).toFixed(3),
-        AVG_NH3: +(group.sumNH3 / count).toFixed(3),
-        AVG_H2S: +(group.sumH2S / count).toFixed(3),
-        AVG_HUMT: +(group.sumHUMT / count).toFixed(3),
-        AVG_TEMP: +(group.sumTEMP / count).toFixed(3),
+        WRT_DATE: key, 
+        MIN_CO2: group.minCO2,
+        MAX_CO2: group.maxCO2,
+        AVG_CO2: +(group.sumCO2 / count).toFixed(2), //객체 속성 key,value
+        MIN_NH3: group.minNH3,
+        MAX_NH3: group.maxNH3,
+        AVG_NH3: +(group.sumNH3 / count).toFixed(2),
+        MIN_H2S: group.minH2S,
+        MAX_H2S: group.maxH2S,
+        AVG_H2S: +(group.sumH2S / count).toFixed(2),
+        MIN_HUMT: group.minHUMT,
+        MAX_HUMT: group.maxHUMT,
+        AVG_HUMT: +(group.sumHUMT / count).toFixed(2),
+        MIN_TEMP: group.minTEMP,
+        MAX_TEMP: group.maxTEMP,
+        AVG_TEMP: +(group.sumTEMP / count).toFixed(2),
       });
     }
 
@@ -222,7 +264,7 @@ const SensorCont = (props) => {
           <div>조회 센서 : 센서{sensorNum} </div>
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
-            <span>2023-03-20 ~ 2023-04-20</span>
+            <span>{startDate}{startDate && endDate && " ~ "}{endDate}</span>
           </div>
           {!isLoading && chartData.length > 0 && (
             <SensorChart data={chartData} />
