@@ -17,7 +17,7 @@ const ScaleCont = (props) => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
   const [chartData, setChartData] = useState([]);
-  const scaleNum=props.scaleNum;
+  const scaleNum = props.scaleNum;
 
   const clickOneMonth = (event) => {
     const today = new Date();
@@ -84,9 +84,9 @@ const ScaleCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-        const dataLink="http://localhost:8080/scaleData"+scaleNum
-        
-        const response = await axios.get(dataLink, {
+      const dataLink = "http://localhost:8080/scaleData" + scaleNum;
+
+      const response = await axios.get(dataLink, {
         params: {
           startDate: sd,
           endDate: ed,
@@ -220,10 +220,12 @@ const ScaleCont = (props) => {
       </Card>
       <Card>
         <div className={classes.graphWrapper}>
-        <div>조회 저울 : 저울{scaleNum} </div>
+          <div>조회 저울 : 저울{scaleNum} </div>
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
+
             <span>{startDate}{startDate && endDate && "~"}{endDate}</span>
+
           </div>
           {!isLoading && chartData.length > 0 && (
             <ScaleChart data={chartData} />

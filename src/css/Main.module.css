@@ -53,15 +53,14 @@
   background-color: white;
 }
 
-.graphWrapper div:first-child{
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.graphWrapper div:first-child {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .graphWrapper div:nth-child(2) {
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,6 +97,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 50px;
+}
+
+.tableHeader div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tableHeader button:first-child {
