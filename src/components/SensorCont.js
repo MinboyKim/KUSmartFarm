@@ -16,7 +16,7 @@ import { CSVLink } from "react-csv";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 const SensorCont = (props) => {
-    const ref = useRef();
+  const ref = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
   const [endDate, setEndDate] = useState(""); // 종료 날짜 상태 변수
@@ -122,24 +122,23 @@ const SensorCont = (props) => {
 
       const allSensorArray = calculatedAlldata.map((obj) => {
         return [
-            obj.WRT_DATE,
-            obj.MIN_CO2,
-            obj.MAX_CO2,
-            obj.AVG_CO2,
-            obj.MINNH3,
-            obj.MAXNH3,
-            obj.AVG_NH3,
-            obj.MINH2S,
-            obj.MAXH2S,
-            obj.AVG_H2S,
-            obj.MINHUMT,
-            obj.MAXHUMT,
-            obj.AVG_HUMT,
-            obj.MINTEMP,
-            obj.MAXTEMP,
-            obj.AVG_TEMP,
-          ];
-  
+          obj.WRT_DATE,
+          obj.MIN_CO2,
+          obj.MAX_CO2,
+          obj.AVG_CO2,
+          obj.MINNH3,
+          obj.MAXNH3,
+          obj.AVG_NH3,
+          obj.MINH2S,
+          obj.MAXH2S,
+          obj.AVG_H2S,
+          obj.MINHUMT,
+          obj.MAXHUMT,
+          obj.AVG_HUMT,
+          obj.MINTEMP,
+          obj.MAXTEMP,
+          obj.AVG_TEMP,
+        ];
       });
       allSensorArray.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
       setAllSensorData(allSensorArray);
@@ -155,8 +154,6 @@ const SensorCont = (props) => {
         })
       );
       setCsvData(csvArray);
-
-
     } catch (error) {
       console.error("Error occurred:", error);
     }
@@ -202,13 +199,12 @@ const SensorCont = (props) => {
         AVG_H2S: +(group.sumH2S / count).toFixed(3),
         AVG_HUMT: +(group.sumHUMT / count).toFixed(3),
         AVG_TEMP: +(group.sumTEMP / count).toFixed(3),
-
       });
     }
 
     return averages;
   }
-  
+
   const headers = [
     { label: "Date", key: "date" },
     { labe: "CO2", key: "co2" },
@@ -327,7 +323,7 @@ const SensorCont = (props) => {
         </div>
       </Card>
       <div className={classes.show}>
-      <button className={classes.btn} onClick={allClickHandle}>
+        <button className={classes.btn} onClick={allClickHandle}>
           전체 센서 조회
         </button>
         <button className={classes.btn} onClick={timeClickHandle}>
@@ -336,10 +332,13 @@ const SensorCont = (props) => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-        <div className={classes.tableHeader}>
+          <div className={classes.tableHeader}>
             <span>
-              환경센서 일별 테이블 {startDate}{startDate && endDate && " ~ "}{endDate}{endDate && " 출력일 : "}
-  {new Date().toLocaleDateString()} 
+              환경센서 일별 테이블 {startDate}
+              {startDate && endDate && " ~ "}
+              {endDate}
+              {endDate && " 출력일 : "}
+              {new Date().toLocaleDateString()}
             </span>
             <div>
               <button
@@ -363,7 +362,7 @@ const SensorCont = (props) => {
             <SensorTimeTable ref={ref} data={chartData} />
           )}
           {!isLoading && chartData.length > 0 && !tableFlag && (
-            <SensorAllTable ref={ref} data={chartData} />
+            <SensorAllTable ref={ref} data={allSensorData} />
           )}
           {!isLoading && chartData.length === 0 && "Found no data"}
           {isLoading && "Loading..."}
