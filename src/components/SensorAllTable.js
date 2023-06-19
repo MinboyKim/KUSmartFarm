@@ -29,22 +29,9 @@ const SensorAllTable = ({ data }) => {
         {dData.map((item, index) => {
           return (
             <tr key={index}>
-              <td>{item[0]}</td>
-              <td>{item[1]}</td>
-              <td>{item[2]}</td>
-              <td>{item[3]}</td>
-              <td>{item[4]}</td>
-              <td>{item[5]}</td>
-              <td>{item[6]}</td>
-              <td>{item[7]}</td>
-              <td>{item[8]}</td>
-              <td>{item[9]}</td>
-              <td>{item[10]}</td>
-              <td>{item[11]}</td>
-              <td>{item[12]}</td>
-              <td>{item[13]}</td>
-              <td>{item[14]}</td>
-              <td>{item[15]}</td>
+              {item.map((value, subIndex) => (
+                <td key={subIndex}>{value !== undefined ? value : "N/A"}</td>
+              ))}
             </tr>
           );
         })}
