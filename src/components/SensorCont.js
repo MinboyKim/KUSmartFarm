@@ -33,11 +33,10 @@ const SensorCont = (props) => {
     const today = new Date();
     const year = today.getFullYear(); // 현재 년도를 가져옵니다.
     var month = today.getMonth(); // 현재 월을 가져옵니다.
-    if(month!=1){
-        month=month-1;
-    }
-    else{
-        month=12;
+    if (month != 1) {
+      month = month - 1;
+    } else {
+      month = 12;
     }
     const day = today.getDate();
     const lastMonthDate = new Date(year, month, day);
@@ -161,24 +160,54 @@ const SensorCont = (props) => {
       }
 
       groups[WRT_DATE].count++;
-      groups[WRT_DATE].minCO2=Math.min(groups[WRT_DATE].minCO2,+obj.CO2_DATA.toFixed(2));
-      groups[WRT_DATE].maxCO2=Math.max(groups[WRT_DATE].maxCO2,+obj.CO2_DATA.toFixed(2));
+      groups[WRT_DATE].minCO2 = Math.min(
+        groups[WRT_DATE].minCO2,
+        +obj.CO2_DATA.toFixed(2)
+      );
+      groups[WRT_DATE].maxCO2 = Math.max(
+        groups[WRT_DATE].maxCO2,
+        +obj.CO2_DATA.toFixed(2)
+      );
       groups[WRT_DATE].sumCO2 += +obj.CO2_DATA.toFixed(2);
 
-      groups[WRT_DATE].minH2S=Math.min(groups[WRT_DATE].minH2S,+obj.H2S_DATA.toFixed(2));
-      groups[WRT_DATE].maxH2S=Math.max(groups[WRT_DATE].maxH2S,+obj.H2S_DATA.toFixed(2));
+      groups[WRT_DATE].minH2S = Math.min(
+        groups[WRT_DATE].minH2S,
+        +obj.H2S_DATA.toFixed(2)
+      );
+      groups[WRT_DATE].maxH2S = Math.max(
+        groups[WRT_DATE].maxH2S,
+        +obj.H2S_DATA.toFixed(2)
+      );
       groups[WRT_DATE].sumH2S += +obj.H2S_DATA.toFixed(2);
 
-      groups[WRT_DATE].minNH3=Math.min(groups[WRT_DATE].minNH3,+obj.NH3_DATA.toFixed(2));
-      groups[WRT_DATE].maxNH3=Math.max(groups[WRT_DATE].maxNH3,+obj.NH3_DATA.toFixed(2));
+      groups[WRT_DATE].minNH3 = Math.min(
+        groups[WRT_DATE].minNH3,
+        +obj.NH3_DATA.toFixed(2)
+      );
+      groups[WRT_DATE].maxNH3 = Math.max(
+        groups[WRT_DATE].maxNH3,
+        +obj.NH3_DATA.toFixed(2)
+      );
       groups[WRT_DATE].sumNH3 += +obj.NH3_DATA.toFixed(2);
 
-      groups[WRT_DATE].minHUMT=Math.min(groups[WRT_DATE].minHUMT,+obj.HUMT_DATA.toFixed(2));
-      groups[WRT_DATE].maxHUMT=Math.max(groups[WRT_DATE].maxHUMT,+obj.HUMT_DATA.toFixed(2));
+      groups[WRT_DATE].minHUMT = Math.min(
+        groups[WRT_DATE].minHUMT,
+        +obj.HUMT_DATA.toFixed(2)
+      );
+      groups[WRT_DATE].maxHUMT = Math.max(
+        groups[WRT_DATE].maxHUMT,
+        +obj.HUMT_DATA.toFixed(2)
+      );
       groups[WRT_DATE].sumHUMT += +obj.HUMT_DATA.toFixed(2);
 
-      groups[WRT_DATE].minTEMP=Math.min(groups[WRT_DATE].minTEMP,+obj.TEMP_DATA.toFixed(2));
-      groups[WRT_DATE].maxTEMP=Math.max(groups[WRT_DATE].maxTEMP,+obj.TEMP_DATA.toFixed(2));
+      groups[WRT_DATE].minTEMP = Math.min(
+        groups[WRT_DATE].minTEMP,
+        +obj.TEMP_DATA.toFixed(2)
+      );
+      groups[WRT_DATE].maxTEMP = Math.max(
+        groups[WRT_DATE].maxTEMP,
+        +obj.TEMP_DATA.toFixed(2)
+      );
       groups[WRT_DATE].sumTEMP += +obj.TEMP_DATA.toFixed(2);
     }
 
@@ -188,7 +217,7 @@ const SensorCont = (props) => {
       const { count } = group;
 
       averages.push({
-        WRT_DATE: key, 
+        WRT_DATE: key,
         MIN_CO2: group.minCO2,
         MAX_CO2: group.maxCO2,
         AVG_CO2: +(group.sumCO2 / count).toFixed(2), //객체 속성 key,value
@@ -229,11 +258,11 @@ const SensorCont = (props) => {
   });
 
   const timeClickHandle = () => {
-    setTableFlag(!tableFlag);
+    setTableFlag(true);
   };
 
   const allClickHandle = () => {
-    setTableFlag(!tableFlag);
+    setTableFlag(false);
   };
 
   return (
@@ -307,7 +336,11 @@ const SensorCont = (props) => {
           <div>조회 센서 : 센서{sensorNum} </div>
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
-            <span>{startDate}{startDate && endDate && " ~ "}{endDate}</span>
+            <span>
+              {startDate}
+              {startDate && endDate && " ~ "}
+              {endDate}
+            </span>
           </div>
           {!isLoading && chartData.length > 0 && (
             <SensorChart data={chartData} />
