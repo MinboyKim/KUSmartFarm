@@ -127,17 +127,17 @@ const SensorCont = (props) => {
             obj.MIN_CO2,
             obj.MAX_CO2,
             obj.AVG_CO2,
-            obj.MINNH3,
-            obj.MAXNH3,
+            obj.MIN_NH3,
+            obj.MAX_NH3,
             obj.AVG_NH3,
-            obj.MINH2S,
-            obj.MAXH2S,
+            obj.MIN_H2S,
+            obj.MAX_H2S,
             obj.AVG_H2S,
-            obj.MINHUMT,
-            obj.MAXHUMT,
+            obj.MIN_HUMT,
+            obj.MAX_HUMT,
             obj.AVG_HUMT,
-            obj.MINTEMP,
-            obj.MAXTEMP,
+            obj.MIN_TEMP,
+            obj.MAX_TEMP,
             obj.AVG_TEMP,
           ];
   
@@ -353,7 +353,7 @@ const SensorCont = (props) => {
             </div>
           </div>
           {!isLoading && chartData.length > 0 && tableFlag && (
-            <SensorTimeTable ref={ref} data={chartData} />
+            <SensorTimeTable ref={ref} data={allSensorData} />
           )}
           {!isLoading && chartData.length > 0 && !tableFlag && (
             <SensorAllTable ref={ref} data={chartData} />

@@ -56,20 +56,20 @@ import React from 'react';
 
       averages.push({
         WRT_DATE: key, 
-        MIN_CO2: group.minCO2,
-        MAX_CO2: group.maxCO2,
+        MIN_CO2: +group.minCO2,
+        MAX_CO2: +group.maxCO2,
         AVG_CO2: +(group.sumCO2 / count).toFixed(2), //객체 속성 key,value
-        MIN_NH3: group.minNH3,
-        MAX_NH3: group.maxNH3,
+        MIN_NH3: +group.minNH3,
+        MAX_NH3: +group.maxNH3,
         AVG_NH3: +(group.sumNH3 / count).toFixed(2),
-        MIN_H2S: group.minH2S,
-        MAX_H2S: group.maxH2S,
+        MIN_H2S: +group.minH2S,
+        MAX_H2S: +group.maxH2S,
         AVG_H2S: +(group.sumH2S / count).toFixed(2),
-        MIN_HUMT: group.minHUMT,
-        MAX_HUMT: group.maxHUMT,
+        MIN_HUMT: +group.minHUMT,
+        MAX_HUMT: +group.maxHUMT,
         AVG_HUMT: +(group.sumHUMT / count).toFixed(2),
-        MIN_TEMP: group.minTEMP,
-        MAX_TEMP: group.maxTEMP,
+        MIN_TEMP: +group.minTEMP,
+        MAX_TEMP: +group.maxTEMP,
         AVG_TEMP: +(group.sumTEMP / count).toFixed(2),
       });
     }
