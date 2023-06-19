@@ -1,4 +1,7 @@
 const SensorAllTable = ({ data }) => {
+  console.log("===data===\n", data);
+  const dData = data.shift();
+  console.log("===dData===\n", dData);
   return (
     <div>
       <table border={1}>
@@ -25,24 +28,16 @@ const SensorAllTable = ({ data }) => {
           <td>최고</td>
           <td>평균</td>
         </tr>
-        <tr>
-          <td>2021-09-01</td>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
-          <td>7</td>
-          <td>8</td>
-          <td>9</td>
-          <td>10</td>
-          <td>11</td>
-          <td>12</td>
-          <td>13</td>
-          <td>14</td>
-          <td>15</td>
-        </tr>
+        {dData &&
+          dData.map((item, index) => {
+            return (
+              <tr key={index}>
+                {item.map((value, subIndex) => (
+                  <td key={subIndex}>{value !== undefined ? value : "N/A"}</td>
+                ))}
+              </tr>
+            );
+          })}
       </table>
     </div>
   );

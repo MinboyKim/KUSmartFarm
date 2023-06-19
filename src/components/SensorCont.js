@@ -16,7 +16,7 @@ import { CSVLink } from "react-csv";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 const SensorCont = (props) => {
-    const ref = useRef();
+  const ref = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
   const [endDate, setEndDate] = useState(""); // 종료 날짜 상태 변수
@@ -34,11 +34,10 @@ const SensorCont = (props) => {
     const today = new Date();
     const year = today.getFullYear(); // 현재 년도를 가져옵니다.
     var month = today.getMonth(); // 현재 월을 가져옵니다.
-    if(month!=1){
-        month=month-1;
-    }
-    else{
-        month=12;
+    if (month != 1) {
+      month = month - 1;
+    } else {
+      month = 12;
     }
     const day = today.getDate();
     const lastMonthDate = new Date(year, month, day);
@@ -156,8 +155,6 @@ const SensorCont = (props) => {
         })
       );
       setCsvData(csvArray);
-
-
     } catch (error) {
       console.error("Error occurred:", error);
     }
@@ -181,10 +178,12 @@ const SensorCont = (props) => {
       }
 
       groups[WRT_DATE].count++;
+
       groups[WRT_DATE].sumCO2 += +obj.CO2_DATA.toFixed(2);
       groups[WRT_DATE].sumH2S += +obj.H2S_DATA.toFixed(2);
       groups[WRT_DATE].sumNH3 += +obj.NH3_DATA.toFixed(2);
       groups[WRT_DATE].sumHUMT += +obj.HUMT_DATA.toFixed(2);
+
       groups[WRT_DATE].sumTEMP += +obj.TEMP_DATA.toFixed(2);
     }
 
@@ -195,6 +194,7 @@ const SensorCont = (props) => {
 
       averages.push({
         WRT_DATE: key,
+
         AVG_CO2: +(group.sumCO2 / count).toFixed(3),
         AVG_NH3: +(group.sumNH3 / count).toFixed(3),
         AVG_H2S: +(group.sumH2S / count).toFixed(3),
@@ -205,7 +205,7 @@ const SensorCont = (props) => {
 
     return averages;
   }
-  
+
   const headers = [
     { label: "Date", key: "date" },
     { labe: "CO2", key: "co2" },
@@ -225,11 +225,11 @@ const SensorCont = (props) => {
   });
 
   const timeClickHandle = () => {
-    setTableFlag(!tableFlag);
+    setTableFlag(true);
   };
 
   const allClickHandle = () => {
-    setTableFlag(!tableFlag);
+    setTableFlag(false);
   };
 
   return (
@@ -303,7 +303,11 @@ const SensorCont = (props) => {
           <div>조회 센서 : 센서{sensorNum} </div>
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
-            <span>{startDate}{startDate && endDate && " ~ "}{endDate}</span>
+            <span>
+              {startDate}
+              {startDate && endDate && " ~ "}
+              {endDate}
+            </span>
           </div>
           {!isLoading && chartData.length > 0 && (
             <SensorChart data={chartData} />
@@ -320,7 +324,7 @@ const SensorCont = (props) => {
         </div>
       </Card>
       <div className={classes.show}>
-      <button className={classes.btn} onClick={allClickHandle}>
+        <button className={classes.btn} onClick={allClickHandle}>
           전체 센서 조회
         </button>
         <button className={classes.btn} onClick={timeClickHandle}>
@@ -329,10 +333,13 @@ const SensorCont = (props) => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-        <div className={classes.tableHeader}>
+          <div className={classes.tableHeader}>
             <span>
-              환경센서 일별 테이블 {startDate}{startDate && endDate && " ~ "}{endDate}{endDate && " 출력일 : "}
-  {new Date().toLocaleDateString()} 
+              환경센서 일별 테이블 {startDate}
+              {startDate && endDate && " ~ "}
+              {endDate}
+              {endDate && " 출력일 : "}
+              {new Date().toLocaleDateString()}
             </span>
             <div>
               <button
@@ -356,7 +363,7 @@ const SensorCont = (props) => {
             <SensorTimeTable ref={ref} data={allSensorData} />
           )}
           {!isLoading && chartData.length > 0 && !tableFlag && (
-            <SensorAllTable ref={ref} data={chartData} />
+            <SensorAllTable ref={ref} data={allSensorData} />
           )}
           {!isLoading && chartData.length === 0 && "Found no data"}
           {isLoading && "Loading..."}
