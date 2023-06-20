@@ -1,7 +1,9 @@
-const SensorAllTable = ({ data }) => {
+import { forwardRef } from "react";
+
+const SensorAllTable = forwardRef((props, ref) => {
   return (
     <div>
-      <table border={1}>
+      <table ref={ref} border={1}>
         <th rowSpan={2}>일자</th>
         <th colSpan={3}>온도</th>
         <th colSpan={3}>습도</th>
@@ -25,8 +27,8 @@ const SensorAllTable = ({ data }) => {
           <td>최고</td>
           <td>평균</td>
         </tr>
-        {data &&
-          data.map((item, index) => {
+        {props.data &&
+          props.data.map((item, index) => {
             return (
               <tr key={index}>
                 {item.map((value, subIndex) => (
@@ -38,6 +40,6 @@ const SensorAllTable = ({ data }) => {
       </table>
     </div>
   );
-};
+});
 
 export default SensorAllTable;

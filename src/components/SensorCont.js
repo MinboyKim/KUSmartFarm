@@ -12,7 +12,7 @@ import SensorChart from "./SensorChart";
 import SensorAllTable from "./SensorAllTable";
 import SensorTimeTable from "./SensorTimeTable";
 import { CSVLink } from "react-csv";
-import { useReactToPrint } from "react-to-print";
+import { PrintComponent, useReactToPrint } from "react-to-print";
 import { useRef } from "react";
 import calculateTimedata from "./calculateTimeData";
 
