@@ -260,7 +260,7 @@ const ScaleCont = (props) => {
       <Card>
         <div className={classes.tableWrapper}>
           {!isLoading && chartData.length > 1 && (
-            <ScaleTable data={chartData} />
+            <ScaleTable data={scaleData} />
           )}
           {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading…"}
