@@ -23,11 +23,10 @@ const ScaleCont = (props) => {
     const today = new Date();
     const year = today.getFullYear(); // 현재 년도를 가져옵니다.
     var month = today.getMonth(); // 현재 월을 가져옵니다.
-    if(month!=1){
-        month=month-1;
-    }
-    else{
-        month=12;
+    if (month != 1) {
+      month = month - 1;
+    } else {
+      month = 12;
     }
     const day = today.getDate();
     const lastMonthDate = new Date(year, month, day);
@@ -224,8 +223,11 @@ const ScaleCont = (props) => {
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
 
-            <span>{startDate}{startDate && endDate && "~"}{endDate}</span>
-
+            <span>
+              {startDate}
+              {startDate && endDate && "~"}
+              {endDate}
+            </span>
           </div>
           {!isLoading && chartData.length > 0 && (
             <ScaleChart data={chartData} />
@@ -240,10 +242,10 @@ const ScaleCont = (props) => {
       </div>
       <Card>
         <div className={classes.tableWrapper}>
-          {!isLoading && chartData.length > 0 && (
+          {!isLoading && chartData.length > 1 && (
             <ScaleTable data={chartData} />
           )}
-          {!isLoading && chartData.length === 0 && "Found no data"}
+          {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading…"}
         </div>
       </Card>
