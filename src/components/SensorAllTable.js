@@ -29,11 +29,11 @@ const SensorAllTable = ({ data }) => {
           <td>평균</td>
         </tr>
         {dData &&
-          dData.map((item, index) => {
+          data.map((item, index) => {
             return (
               <tr key={index}>
                 {item.map((value, subIndex) => (
-                  <td key={subIndex}>{value !== undefined ? value : "N/A"}</td>
+                  <td key={subIndex}>{value}</td>
                 ))}
               </tr>
             );
