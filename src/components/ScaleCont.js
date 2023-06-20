@@ -229,10 +229,10 @@ const ScaleCont = (props) => {
               {endDate}
             </span>
           </div>
-          {!isLoading && chartData.length > 0 && (
+          {!isLoading && chartData.length > 1 && (
             <ScaleChart data={chartData} />
           )}
-          {!isLoading && chartData.length === 0 && "Found no data"}
+          {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading…"}
         </div>
       </Card>
