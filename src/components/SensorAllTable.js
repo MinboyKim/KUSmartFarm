@@ -1,5 +1,4 @@
 const SensorAllTable = ({ data }) => {
-
   return (
     <div>
       <table border={1}>
