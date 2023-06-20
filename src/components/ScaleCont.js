@@ -9,9 +9,12 @@ import calculateScaleData from "./calculateScaleData";
 import Card from "./Card";
 import ScaleChart from "./ScaleChart";
 import ScaleTable from "./ScaleTable";
-
+import { CSVLink } from "react-csv";
+import { PrintComponent, useReactToPrint } from "react-to-print";
+import { useRef } from "react";
 
 const ScaleCont = (props) => {
+  const ref = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
   const [endDate, setEndDate] = useState(""); // 종료 날짜 상태 변수
@@ -20,6 +23,8 @@ const ScaleCont = (props) => {
   const [chartData, setChartData] = useState([]);
   const [scaleData, setScaleData] = useState([]);
   const scaleNum = props.scaleNum;
+  const [csvHeader, setCsvHeader] = useState([]);
+  const [csvData, setCsvData] = useState([]);
 
   const clickOneMonth = (event) => {
     const today = new Date();
@@ -86,7 +91,8 @@ const ScaleCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const dataLink = "http://localhost:8080/scaleData" + scaleNum;
+      const dataLink =
+        "http://kusmartfarm.synology.me:8080/scaleData" + scaleNum;
 
       const response = await axios.get(dataLink, {
         params: {
@@ -96,7 +102,7 @@ const ScaleCont = (props) => {
       });
 
       const averages = calculateAverages(response.data);
-      const allScaledata=calculateScaleData(response.data);
+      const allScaledata = calculateScaleData(response.data);
 
       const chartArray = averages.map((obj) => {
         return [
@@ -115,21 +121,28 @@ const ScaleCont = (props) => {
       setChartData(chartArray);
 
       const scaleArray = allScaledata.map((obj) => {
-        return [
-          obj.WRT_DATE,
-          obj.AVG_SCALE,
-          obj.COUNT,
-          obj.SCALE_PER_ANIMAL,
-        ];
+        return [obj.WRT_DATE, obj.AVG_SCALE, obj.COUNT, obj.SCALE_PER_ANIMAL];
       });
-      scaleArray.unshift([
-        "날짜",
-        "평균 무게",
-        "데이터 개수",
-        "목록",
-      ]);
+      scaleArray.unshift(["날짜", "평균 무게", "데이터 개수", "목록"]);
       setScaleData(scaleArray);
 
+      const header = [
+        { label: "날짜", key: "WRT_DATE" },
+        { label: "평균 무게", key: "AVG_SCALE" },
+        { label: "데이터 개수", key: "COUNT" },
+        { label: "목록", key: "SCALE_PER_ANIMAL" },
+      ];
+      setCsvHeader(header);
+
+      const csvD = allScaledata.map((obj) => {
+        return {
+          WRT_DATE: obj.WRT_DATE,
+          AVG_SCALE: obj.AVG_SCALE,
+          COUNT: obj.COUNT,
+          SCALE_PER_ANIMAL: null,
+        };
+      });
+      setCsvData(csvD);
     } catch (error) {
       console.error("Error occurred:", error);
     }
@@ -165,12 +178,21 @@ const ScaleCont = (props) => {
         WRT_DATE: key,
         TOTAL_SCALE: +(group.sumTOTAL_SCALE / count).toFixed(3),
         AI_SCALE: +(group.sumAI_SCALE / count).toFixed(3),
-        IMAGE: "../images/LIST.png"
+        IMAGE: "../images/LIST.png",
       });
     }
 
     return averages;
   }
+
+  const onClickPrint = () => {
+    handlePrint();
+  };
+
+  const handlePrint = useReactToPrint({
+    content: () => ref.current,
+    documentTitle: "육계저울 데이터",
+  });
 
   return (
     <div>
@@ -260,8 +282,34 @@ const ScaleCont = (props) => {
 
       <Card>
         <div className={classes.tableWrapper}>
+          <div className={classes.tableHeader}>
+            <span>
+              육계저울 일별 테이블 {startDate}
+              {startDate && endDate && " ~ "}
+              {endDate}
+              {endDate && " 출력일 : "}
+              {new Date().toLocaleDateString()}
+            </span>
+            <div>
+              <button
+                onClick={onClickPrint}
+                className={classes.tableHeader__btn}
+              >
+                인쇄
+              </button>
+              <CSVLink
+                data={csvData}
+                headers={csvHeader}
+                filename={"육계저울_CSV_데이터"}
+              >
+                <button className={classes.tableHeader__btn}>
+                  CSV 다운로드
+                </button>
+              </CSVLink>
+            </div>
+          </div>
           {!isLoading && chartData.length > 1 && (
-            <ScaleTable data={scaleData} />
+            <ScaleTable ref={ref} data={scaleData} />
           )}
           {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading…"}
