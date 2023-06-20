@@ -4,29 +4,157 @@ const SensorAllTable = forwardRef((props, ref) => {
   return (
     <div>
       <table ref={ref} border={1}>
-        <th rowSpan={2}>일자</th>
-        <th colSpan={3}>온도</th>
-        <th colSpan={3}>습도</th>
-        <th colSpan={3}>CO2</th>
-        <th colSpan={3}>암모니아</th>
-        <th colSpan={3}>황화수소</th>
-        <tr>
-          <td>최저</td>
-          <td>최고</td>
-          <td>평균</td>
-          <td>최저</td>
-          <td>최고</td>
-          <td>평균</td>
-          <td>최저</td>
-          <td>최고</td>
-          <td>평균</td>
-          <td>최저</td>
-          <td>최고</td>
-          <td>평균</td>
-          <td>최저</td>
-          <td>최고</td>
-          <td>평균</td>
-        </tr>
+        <thead
+          style={{
+            backgroundColor: "#21BA3B",
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          <th rowSpan={2}>일자</th>
+          <th colSpan={3}>온도</th>
+          <th colSpan={3}>습도</th>
+          <th colSpan={3}>CO2</th>
+          <th colSpan={3}>암모니아</th>
+          <th colSpan={3}>황화수소</th>
+          <tr>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최저
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최고
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              평균
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최저
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최고
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              평균
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최저
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최고
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              평균
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최저
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최고
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              평균
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최저
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              최고
+            </td>
+            <td
+              style={{
+                backgroundColor: "#21BA3B",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              평균
+            </td>
+          </tr>
+        </thead>
         {props.data &&
           props.data.map((item, index) => {
             return (
