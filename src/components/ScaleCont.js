@@ -71,6 +71,7 @@ const ScaleCont = (props) => {
 
   const check = () => {
     console.log(startDate, endDate);
+    setCalenderVisibility(false);
     handleClick(startDate, endDate);
   };
 
