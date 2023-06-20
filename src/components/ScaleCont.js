@@ -5,10 +5,11 @@ import Calendar from "react-calendar";
 
 import classes from "../css/Main.module.css";
 import myCalendar from "../css/MyCalender.css";
-
+import calculateScaleData from "./calculateScaleData";
 import Card from "./Card";
 import ScaleChart from "./ScaleChart";
 import ScaleTable from "./ScaleTable";
+
 
 const ScaleCont = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +18,7 @@ const ScaleCont = (props) => {
   const [calenderVisibility, setCalenderVisibility] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
   const [chartData, setChartData] = useState([]);
+  const [scaleData, setScaleData] = useState([]);
   const scaleNum = props.scaleNum;
 
   const clickOneMonth = (event) => {
@@ -93,6 +95,8 @@ const ScaleCont = (props) => {
       });
 
       const averages = calculateAverages(response.data);
+      const allScaledata=calculateScaleData(response.data);
+
       const chartArray = averages.map((obj) => {
         return [
           obj.WRT_DATE,
@@ -108,7 +112,23 @@ const ScaleCont = (props) => {
         "마리당 무게",
       ]);
       setChartData(chartArray);
-      console.log(chartData);
+
+      const scaleArray = allScaledata.map((obj) => {
+        return [
+          obj.WRT_DATE,
+          obj.AVG_SCALE,
+          obj.COUNT,
+          obj.SCALE_PER_ANIMAL,
+        ];
+      });
+      scaleArray.unshift([
+        "날짜",
+        "평균 무게",
+        "데이터 개수",
+        "목록",
+      ]);
+      setScaleData(scaleArray);
+
     } catch (error) {
       console.error("Error occurred:", error);
     }
@@ -144,7 +164,7 @@ const ScaleCont = (props) => {
         WRT_DATE: key,
         TOTAL_SCALE: +(group.sumTOTAL_SCALE / count).toFixed(3),
         AI_SCALE: +(group.sumAI_SCALE / count).toFixed(3),
-        SCALE_PER_ANIMAL: +(group.sumSCALE_PER_ANIMAL / count).toFixed(3),
+        IMAGE: "../images/LIST.png"
       });
     }
 
@@ -236,10 +256,7 @@ const ScaleCont = (props) => {
           {isLoading && "Loading…"}
         </div>
       </Card>
-      <div className={classes.show}>
-        <button className={classes.btn}>전체 센서 조회</button>
-        <button className={classes.btn}>시간대별 조회</button>
-      </div>
+
       <Card>
         <div className={classes.tableWrapper}>
           {!isLoading && chartData.length > 1 && (

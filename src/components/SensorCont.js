@@ -9,7 +9,6 @@ import myCalendar from "../css/MyCalender.css";
 import calculateAlldata from "./calculateAlldata";
 import Card from "./Card";
 import SensorChart from "./SensorChart";
-import SensorTable from "./SensorTable";
 import SensorAllTable from "./SensorAllTable";
 import SensorTimeTable from "./SensorTimeTable";
 import { CSVLink } from "react-csv";
@@ -402,13 +401,6 @@ const SensorCont = (props) => {
           )}
           {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading..."}
-          <div className={classes.graphWrapper__btn}>
-            <button className={classes.btn}>이산화탄소</button>
-            <button className={classes.btn}>암모니아</button>
-            <button className={classes.btn}>황화수소</button>
-            <button className={classes.btn}>온도</button>
-            <button className={classes.btn}>습도</button>
-          </div>
         </div>
       </Card>
       <div className={classes.show}>

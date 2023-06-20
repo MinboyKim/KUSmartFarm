@@ -17,7 +17,7 @@ const ScaleChart = ({ data }) => {
   };
 
   return (
-    <div>
+    <div style={{overflowX: "auto"}}>
       <Chart chartType="Line" data={data} options={options} />
     </div>
   );
