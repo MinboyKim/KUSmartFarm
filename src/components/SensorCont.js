@@ -29,7 +29,10 @@ const SensorCont = (props) => {
   const [timeSensorData, setTimeSensorData] = useState([]);
   const [Data, setData] = useState([]);
 
+  const [csvAlldata, setCsvAlldata] = useState([]);
+  const [csvTimedata, setCsvTimedata] = useState([]);
   const [tableFlag, setTableFlag] = useState(false);
+  const [csvHeader, setCsvHeader] = useState([]);
   const [csvData, setCsvData] = useState([]);
   const sensorNum = props.sensorNum;
 
@@ -109,7 +112,7 @@ const SensorCont = (props) => {
       setData(response.data);
       const averages = calculateAverages(Data);
       const calculatedAlldata = calculateAlldata(Data);
-      const timeData= calculateTimedata(Data);
+      const timeData = calculateTimedata(Data);
 
       const chartArray = averages.map((obj) => {
         return [
@@ -126,61 +129,96 @@ const SensorCont = (props) => {
 
       const allSensorArray = calculatedAlldata.map((obj) => {
         return [
-            obj.WRT_DATE,
-            obj.MIN_CO2,
-            obj.MAX_CO2,
-            obj.AVG_CO2,
-            obj.MIN_NH3,
-            obj.MAX_NH3,
-            obj.AVG_NH3,
-            obj.MIN_H2S,
-            obj.MAX_H2S,
-            obj.AVG_H2S,
-            obj.MIN_HUMT,
-            obj.MAX_HUMT,
-            obj.AVG_HUMT,
-            obj.MIN_TEMP,
-            obj.MAX_TEMP,
-            obj.AVG_TEMP,
-          ];
-
+          obj.WRT_DATE,
+          obj.MIN_CO2,
+          obj.MAX_CO2,
+          obj.AVG_CO2,
+          obj.MIN_NH3,
+          obj.MAX_NH3,
+          obj.AVG_NH3,
+          obj.MIN_H2S,
+          obj.MAX_H2S,
+          obj.AVG_H2S,
+          obj.MIN_HUMT,
+          obj.MAX_HUMT,
+          obj.AVG_HUMT,
+          obj.MIN_TEMP,
+          obj.MAX_TEMP,
+          obj.AVG_TEMP,
+        ];
       });
-      allSensorArray.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
       setAllSensorData(allSensorArray);
+
+      const csvAllArray = allSensorArray.map(
+        ([
+          date,
+          co2_lo,
+          co2_hi,
+          co2_avg,
+          nh3_lo,
+          nh3_hi,
+          nh3_avg,
+          h2s_lo,
+          h2s_hi,
+          h2s_avg,
+          humt_lo,
+          humt_hi,
+          humt_avg,
+          temp_lo,
+          temp_hi,
+          temp_avg,
+        ]) => ({
+          date,
+          co2_lo,
+          co2_hi,
+          co2_avg,
+          nh3_lo,
+          nh3_hi,
+          nh3_avg,
+          h2s_lo,
+          h2s_hi,
+          h2s_avg,
+          humt_lo,
+          humt_hi,
+          humt_avg,
+          temp_lo,
+          temp_hi,
+          temp_avg,
+        })
+      );
+      setCsvAlldata(csvAllArray);
 
       const allTimeArray = [];
       for (const date in timeData) {
         const timeDataForDate = timeData[date];
-        
+
         for (const hour in timeDataForDate) {
           const data = timeDataForDate[hour];
           const { CO2, NH3, H2S, HUMT, TEMP } = data;
-          if(hour<9){
-          var time = "0"+hour + " ~ " + "0"+(parseInt(hour) + 1);
-          }
-          else if(hour==9){
-            var time = "0"+hour + " ~ " + (parseInt(hour) + 1);
-          }else{
+          if (hour < 9) {
+            var time = "0" + hour + " ~ " + "0" + (parseInt(hour) + 1);
+          } else if (hour == 9) {
+            var time = "0" + hour + " ~ " + (parseInt(hour) + 1);
+          } else {
             var time = hour + " ~ " + (parseInt(hour) + 1);
-        }
+          }
           allTimeArray.push([date, time, TEMP, HUMT, CO2, NH3, H2S]);
         }
       }
-      
-      allTimeArray.unshift(["Date","Time", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
       setTimeSensorData(allTimeArray);
 
-      const csvArray = chartData.map(
-        ([date, co2, nh3, h2s, temperature, humidity]) => ({
+      const csvTimeArray = allTimeArray.map(
+        ([date, time, co2, nh3, h2s, humt, temp]) => ({
           date,
+          time,
           co2,
           nh3,
           h2s,
-          temperature,
-          humidity,
+          humt,
+          temp,
         })
       );
-      setCsvData(csvArray);
+      setCsvTimedata(csvTimeArray);
     } catch (error) {
       console.error("Error occurred:", error);
     }
@@ -213,7 +251,6 @@ const SensorCont = (props) => {
       groups[WRT_DATE].sumTEMP += +obj.TEMP_DATA.toFixed(2);
     }
 
-    
     const averages = [];
     for (const key in groups) {
       const group = groups[key];
@@ -235,11 +272,31 @@ const SensorCont = (props) => {
 
   const headers = [
     { label: "Date", key: "date" },
-    { labe: "CO2", key: "co2" },
+    { label: "Time", key: "time" },
+    { label: "CO2", key: "co2" },
     { label: "NH3", key: "nh3" },
     { label: "H2S", key: "h2s" },
-    { label: "온도", key: "temperature" },
-    { label: "습도", key: "humidity" },
+    { label: "HUMT", key: "humt" },
+    { label: "TEMP", key: "temp" },
+  ];
+
+  const headersAll = [
+    { label: "Date", key: "date" },
+    { label: "CO2_LOW", key: "co2_lo" },
+    { label: "CO2_HIGH", key: "co2_hi" },
+    { label: "CO2_AVG", key: "co2_avg" },
+    { label: "NH3_LOW", key: "nh3_lo" },
+    { label: "NH3_HIGH", key: "nh3_hi" },
+    { label: "NH3_AVG", key: "nh3_avg" },
+    { label: "H2S_LOW", key: "h2s_lo" },
+    { label: "H2S_HIGH", key: "h2s_hi" },
+    { label: "H2S_AVG", key: "h2s_avg" },
+    { label: "HUMT_LOW", key: "humt_lo" },
+    { label: "HUMT_HIGH", key: "humt_hi" },
+    { label: "HUMT_AVG", key: "humt_avg" },
+    { label: "TEMP_LOW", key: "temp_lo" },
+    { label: "TEMP_HIGH", key: "temp_hi" },
+    { label: "TEMP_AVG", key: "temp_avg" },
   ];
 
   const onClickPrint = () => {
@@ -252,10 +309,14 @@ const SensorCont = (props) => {
   });
 
   const timeClickHandle = () => {
+    setCsvData(csvTimedata);
+    setCsvHeader(headers);
     setTableFlag(true);
   };
 
   const allClickHandle = () => {
+    setCsvData(csvAlldata);
+    setCsvHeader(headersAll);
     setTableFlag(false);
   };
 
@@ -336,10 +397,10 @@ const SensorCont = (props) => {
               {endDate}
             </span>
           </div>
-          {!isLoading && chartData.length > 0 && (
+          {!isLoading && chartData.length > 1 && (
             <SensorChart data={chartData} />
           )}
-          {!isLoading && chartData.length === 0 && "Found no data"}
+          {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading..."}
           <div className={classes.graphWrapper__btn}>
             <button className={classes.btn}>이산화탄소</button>
@@ -377,7 +438,7 @@ const SensorCont = (props) => {
               </button>
               <CSVLink
                 data={csvData}
-                headers={headers}
+                headers={csvHeader}
                 filename={"환경센서_CSV_데이터"}
               >
                 <button className={classes.tableHeader__btn}>
@@ -386,13 +447,13 @@ const SensorCont = (props) => {
               </CSVLink>
             </div>
           </div>
-          {!isLoading && chartData.length > 0 && tableFlag && (
-            <SensorTimeTable ref={ref} data={timeSensorData} />
-          )}
-          {!isLoading && chartData.length > 0 && !tableFlag && (
+          {!isLoading && allSensorData.length > 1 && !tableFlag && (
             <SensorAllTable ref={ref} data={allSensorData} />
           )}
-          {!isLoading && chartData.length === 0 && "Found no data"}
+          {!isLoading && timeSensorData.length > 1 && tableFlag && (
+            <SensorTimeTable ref={ref} data={timeSensorData} />
+          )}
+          {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading..."}
         </div>
       </Card>
