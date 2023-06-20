@@ -10,6 +10,7 @@ import Card from "./Card";
 import ScaleChart from "./ScaleChart";
 import ScaleTable from "./ScaleTable";
 
+
 const ScaleCont = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [startDate, setStartDate] = useState(""); // 시작 날짜 상태 변수
@@ -24,11 +25,10 @@ const ScaleCont = (props) => {
     const today = new Date();
     const year = today.getFullYear(); // 현재 년도를 가져옵니다.
     var month = today.getMonth(); // 현재 월을 가져옵니다.
-    if(month!=1){
-        month=month-1;
-    }
-    else{
-        month=12;
+    if (month != 1) {
+      month = month - 1;
+    } else {
+      month = 12;
     }
     const day = today.getDate();
     const lastMonthDate = new Date(year, month, day);
@@ -164,7 +164,7 @@ const ScaleCont = (props) => {
         WRT_DATE: key,
         TOTAL_SCALE: +(group.sumTOTAL_SCALE / count).toFixed(3),
         AI_SCALE: +(group.sumAI_SCALE / count).toFixed(3),
-        SCALE_PER_ANIMAL: +(group.sumSCALE_PER_ANIMAL / count).toFixed(3),
+        IMAGE: "../images/LIST.png"
       });
     }
 
@@ -243,23 +243,26 @@ const ScaleCont = (props) => {
           <div className={classes.graphWrapper__header}>
             <h4>조회 날짜</h4>
 
-            <span>{startDate}{startDate && endDate && "~"}{endDate}</span>
-
+            <span>
+              {startDate}
+              {startDate && endDate && "~"}
+              {endDate}
+            </span>
           </div>
-          {!isLoading && chartData.length > 0 && (
+          {!isLoading && chartData.length > 1 && (
             <ScaleChart data={chartData} />
           )}
-          {!isLoading && chartData.length === 0 && "Found no data"}
+          {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading…"}
         </div>
       </Card>
 
       <Card>
         <div className={classes.tableWrapper}>
-          {!isLoading && chartData.length > 0 && (
-            <ScaleTable data={scaleData} />
+          {!isLoading && chartData.length > 1 && (
+            <ScaleTable data={chartData} />
           )}
-          {!isLoading && chartData.length === 0 && "Found no data"}
+          {!isLoading && chartData.length === 1 && "Found no data"}
           {isLoading && "Loading…"}
         </div>
       </Card>

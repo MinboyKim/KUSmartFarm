@@ -14,13 +14,19 @@ const ScaleTable = ({ data }) => {
           </tr>
           </thead>
           <tbody>
-            {allTimeArray.slice(1).map((rowData, index) => (
-                <tr key={index} >
-                    {rowData.map((data, dataIndex) => (
-                        <td key={dataIndex} style={{ textAlign: "center" }}>{data}</td>
-                    ))}
-                </tr>
-            ))}
+          {allTimeArray.slice(1).map((rowData, index) => (
+            <tr key={index}>
+                {rowData.map((data, dataIndex) => {
+                    if (dataIndex === rowData.length - 1) {
+                        return <td key={dataIndex} style={{ textAlign: "center" }}>
+                            <img src={data} alt="Image" />
+                        </td>;
+                    } else {
+                return <td key={dataIndex} style={{ textAlign: "center" }}>{data}</td>;
+            }
+        })}
+    </tr>
+))}
           </tbody>
         </table>
       </div>

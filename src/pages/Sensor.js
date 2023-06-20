@@ -7,7 +7,6 @@ import Layout from "./layout/Layout";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import SensorChart from "../components/SensorChart.js";
-import SensorTable from "../components/SensorTable";
 import SensorCont from "../components/SensorCont";
 
 const Sensor = (props) => {

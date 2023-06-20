@@ -9,7 +9,6 @@ import myCalendar from "../css/MyCalender.css";
 import calculateAlldata from "./calculateAlldata";
 import Card from "./Card";
 import SensorChart from "./SensorChart";
-import SensorTable from "./SensorTable";
 import SensorAllTable from "./SensorAllTable";
 import SensorTimeTable from "./SensorTimeTable";
 import { CSVLink } from "react-csv";
