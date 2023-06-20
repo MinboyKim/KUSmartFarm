@@ -1,5 +1,5 @@
 import axios from "axios";
-import { set } from "date-fns";
+import { hoursToMilliseconds, set } from "date-fns";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
@@ -15,6 +15,8 @@ import SensorTimeTable from "./SensorTimeTable";
 import { CSVLink } from "react-csv";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
+import calculateTimedata from "./calculateTimeData";
+
 const SensorCont = (props) => {
   const ref = useRef();
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +26,7 @@ const SensorCont = (props) => {
   const [selectedButton, setSelectedButton] = useState("");
   const [chartData, setChartData] = useState([]);
   const [allSensorData, setAllSensorData] = useState([]);
+  const [timeSensorData, setTimeSensorData] = useState([]);
   const [Data, setData] = useState([]);
 
   const [tableFlag, setTableFlag] = useState(false);
@@ -106,6 +109,7 @@ const SensorCont = (props) => {
       setData(response.data);
       const averages = calculateAverages(Data);
       const calculatedAlldata = calculateAlldata(Data);
+      const timeData= calculateTimedata(Data);
 
       const chartArray = averages.map((obj) => {
         return [
@@ -139,10 +143,32 @@ const SensorCont = (props) => {
             obj.MAX_TEMP,
             obj.AVG_TEMP,
           ];
-  
+
       });
       allSensorArray.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
       setAllSensorData(allSensorArray);
+
+      const allTimeArray = [];
+      for (const date in timeData) {
+        const timeDataForDate = timeData[date];
+        
+        for (const hour in timeDataForDate) {
+          const data = timeDataForDate[hour];
+          const { CO2, NH3, H2S, HUMT, TEMP } = data;
+          if(hour<9){
+          var time = "0"+hour + " ~ " + "0"+(parseInt(hour) + 1);
+          }
+          else if(hour==9){
+            var time = "0"+hour + " ~ " + (parseInt(hour) + 1);
+          }else{
+            var time = hour + " ~ " + (parseInt(hour) + 1);
+        }
+          allTimeArray.push([date, time, TEMP, HUMT, CO2, NH3, H2S]);
+        }
+      }
+      
+      allTimeArray.unshift(["Date","Time", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
+      setTimeSensorData(allTimeArray);
 
       const csvArray = chartData.map(
         ([date, co2, nh3, h2s, temperature, humidity]) => ({
@@ -187,6 +213,7 @@ const SensorCont = (props) => {
       groups[WRT_DATE].sumTEMP += +obj.TEMP_DATA.toFixed(2);
     }
 
+    
     const averages = [];
     for (const key in groups) {
       const group = groups[key];
@@ -360,7 +387,7 @@ const SensorCont = (props) => {
             </div>
           </div>
           {!isLoading && chartData.length > 0 && tableFlag && (
-            <SensorTimeTable ref={ref} data={allSensorData} />
+            <SensorTimeTable ref={ref} data={timeSensorData} />
           )}
           {!isLoading && chartData.length > 0 && !tableFlag && (
             <SensorAllTable ref={ref} data={allSensorData} />
