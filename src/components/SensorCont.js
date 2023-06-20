@@ -341,13 +341,6 @@ const SensorCont = (props) => {
           )}
           {!isLoading && chartData.length === 0 && "Found no data"}
           {isLoading && "Loading..."}
-          <div className={classes.graphWrapper__btn}>
-            <button className={classes.btn}>이산화탄소</button>
-            <button className={classes.btn}>암모니아</button>
-            <button className={classes.btn}>황화수소</button>
-            <button className={classes.btn}>온도</button>
-            <button className={classes.btn}>습도</button>
-          </div>
         </div>
       </Card>
       <div className={classes.show}>

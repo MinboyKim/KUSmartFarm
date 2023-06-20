@@ -1,7 +1,5 @@
 const SensorAllTable = ({ data }) => {
-  console.log("===data===\n", data);
-  const dData = data.shift();
-  console.log("===dData===\n", dData);
+
   return (
     <div>
       <table border={1}>
@@ -28,7 +26,7 @@ const SensorAllTable = ({ data }) => {
           <td>최고</td>
           <td>평균</td>
         </tr>
-        {dData &&
+        {data &&
           data.map((item, index) => {
             return (
               <tr key={index}>

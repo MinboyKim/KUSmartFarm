@@ -25,11 +25,9 @@ const SensorChart = ({ data }) => {
   };
 
   return (
-    <div style={{ width: '100%', overflow: 'scroll' }}>
-    <div style={{ width: '200%' }}>
+    <div style={{ maxWidth: '100%' }}>
       <Chart chartType="LineChart" data={data} options={options} />
     </div>
-  </div>
   );
 };
 
