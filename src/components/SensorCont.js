@@ -100,7 +100,11 @@ const SensorCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
+<<<<<<< HEAD
+      const dataLink = "http://114.70.22.49:8080/sensorData" + sensorNum;
+=======
       const dataLink = "http://kusmartfarm.synology.me:8080/sensorData" + sensorNum;
+>>>>>>> df6e327a1f245446e4ccf4ca3e88c9372141ad7e
 
       const response = await axios.get(dataLink,{
         withCredentials: true,
@@ -111,6 +115,7 @@ const SensorCont = (props) => {
       });
 
       setData(response.data);
+      console.log("response", response.data);
       const averages = calculateAverages(Data);
       const calculatedAlldata = calculateAlldata(Data);
       const timeData = calculateTimedata(Data);
@@ -227,6 +232,7 @@ const SensorCont = (props) => {
   }
 
   function calculateAverages(data) {
+    console.log("data", data);
     const groups = {};
 
     for (const obj of data) {

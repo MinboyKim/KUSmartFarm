@@ -1,7 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.37da2891.css",
+<<<<<<< HEAD
     "main.js": "/static/js/main.c141d3ae.js",
+=======
+<<<<<<< HEAD
+    "main.js": "/static/js/main.ffaf7f59.js",
+=======
+    "main.js": "/static/js/main.813376a5.js",
+>>>>>>> df6e327a1f245446e4ccf4ca3e88c9372141ad7e
+>>>>>>> ed788b347311c7cb6489164e637cd1556f40396b
     "static/media/Korail_Round_Gothic_Medium.ttf": "/static/media/Korail_Round_Gothic_Medium.77c2552767f7c56fa4ed.ttf",
     "static/media/Korail_Round_Gothic_Bold.ttf": "/static/media/Korail_Round_Gothic_Bold.6fadf0bc223edd244f35.ttf",
     "static/media/Korail_Round_Gothic_Light.ttf": "/static/media/Korail_Round_Gothic_Light.401d16ba91710d9dc5d0.ttf",
@@ -16,10 +24,26 @@
     "static/media/KULOGO.png": "/static/media/KULOGO.bc720d721ae10fa1d086.png",
     "index.html": "/index.html",
     "main.37da2891.css.map": "/static/css/main.37da2891.css.map",
+<<<<<<< HEAD
     "main.c141d3ae.js.map": "/static/js/main.c141d3ae.js.map"
   },
   "entrypoints": [
     "static/css/main.37da2891.css",
     "static/js/main.c141d3ae.js"
+=======
+<<<<<<< HEAD
+    "main.ffaf7f59.js.map": "/static/js/main.ffaf7f59.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37da2891.css",
+    "static/js/main.ffaf7f59.js"
+=======
+    "main.813376a5.js.map": "/static/js/main.813376a5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37da2891.css",
+    "static/js/main.813376a5.js"
+>>>>>>> df6e327a1f245446e4ccf4ca3e88c9372141ad7e
+>>>>>>> ed788b347311c7cb6489164e637cd1556f40396b
   ]
 }
