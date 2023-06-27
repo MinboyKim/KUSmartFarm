@@ -102,7 +102,8 @@ const SensorCont = (props) => {
     try {
       const dataLink = "http://kusmartfarm.synology.me:8080/sensorData" + sensorNum;
 
-      const response = await axios.get(dataLink, { withCredentials: true },{
+      const response = await axios.get(dataLink,{
+        withCredentials: true,
         params: {
           startDate: sd,
           endDate: ed,
