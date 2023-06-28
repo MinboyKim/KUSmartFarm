@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const path = require("path");
 const app = express();
 const mysql = require("mysql");
@@ -26,6 +27,11 @@ Body: 테이블 KU_TBL_ENVIRONMENT의 데이터 (JSON 형식)
 Content-Type: application/json
 Body: { "error": "Internal Server Error" }
 */
+const corsOptions = {
+    origin: "localhost:8080"
+  };
+  
+  app.use(cors(corsOptions));
 
 connection.connect(function (err) {
   if (err) {
@@ -51,7 +57,7 @@ app.get("/sensorData1", (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
       return;
     }
-
+    
     // 쿼리 결과를 JSON 형태로 반환
     res.json(results);
   });
@@ -60,7 +66,7 @@ app.get("/sensorData1", (req, res) => {
 app.get("/sensorData2", (req, res) => {
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
-    console.log(startDate, endDate);
+    console.log(startDate, endDate);    
   
     // MySQL 쿼리 작성
     const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST_BACK WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '002')`;
