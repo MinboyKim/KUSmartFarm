@@ -100,7 +100,7 @@ const SensorCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const dataLink = "http://localhost:8080/sensorData" + sensorNum;
+      const dataLink = "http://114.70.22.49:8080/sensorData" + sensorNum;
 
       const response = await axios.get(dataLink, {
         params: {
@@ -109,6 +109,7 @@ const SensorCont = (props) => {
         },
       });
       setData(response.data);
+      console.log("response", response.data);
       const averages = calculateAverages(Data);
       const calculatedAlldata = calculateAlldata(Data);
       const timeData = calculateTimedata(Data);
@@ -225,6 +226,7 @@ const SensorCont = (props) => {
   }
 
   function calculateAverages(data) {
+    console.log("data", data);
     const groups = {};
 
     for (const obj of data) {
