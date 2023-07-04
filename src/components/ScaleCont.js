@@ -91,7 +91,7 @@ const ScaleCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-      const dataLink = "http://114.70.22.49:8080/scaleData" + scaleNum;
+      const dataLink = "http://localhost:8080/scaleData" + scaleNum;
 
       const response = await axios.get(dataLink, {
         params: {

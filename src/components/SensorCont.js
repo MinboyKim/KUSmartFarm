@@ -35,6 +35,10 @@ const SensorCont = (props) => {
   const [csvData, setCsvData] = useState([]);
   const sensorNum = props.sensorNum;
 
+  useEffect(() => {
+    console.log("chartData changed:", chartData);
+  }, [chartData]);
+
   const clickOneMonth = (event) => {
     const today = new Date();
     const year = today.getFullYear(); // 현재 년도를 가져옵니다.
@@ -100,13 +104,9 @@ const SensorCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-<<<<<<< HEAD
-      const dataLink = "http://114.70.22.49:8080/sensorData" + sensorNum;
-=======
-      const dataLink = "http://kusmartfarm.synology.me:8080/sensorData" + sensorNum;
->>>>>>> df6e327a1f245446e4ccf4ca3e88c9372141ad7e
+      const dataLink = "http://localhost:8080/sensorData" + sensorNum;
 
-      const response = await axios.get(dataLink,{
+      const response = await axios.get(dataLink, {
         withCredentials: true,
         params: {
           startDate: sd,
@@ -115,10 +115,10 @@ const SensorCont = (props) => {
       });
 
       setData(response.data);
-      console.log("response", response.data);
-      const averages = calculateAverages(Data);
-      const calculatedAlldata = calculateAlldata(Data);
-      const timeData = calculateTimedata(Data);
+      console.log("response", Data);
+      const averages = calculateAverages(response.data);
+      const calculatedAlldata = calculateAlldata(response.data);
+      const timeData = calculateTimedata(response.data);
 
       const chartArray = averages.map((obj) => {
         return [
@@ -132,6 +132,7 @@ const SensorCont = (props) => {
       });
       chartArray.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
       setChartData(chartArray);
+      console.log("chartData", chartData);
 
       const allSensorArray = calculatedAlldata.map((obj) => {
         return [
