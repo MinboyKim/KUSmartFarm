@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import { hoursToMilliseconds, set } from "date-fns";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -113,12 +113,17 @@ const SensorCont = (props) => {
           endDate: ed,
         },
       });
-
       setData(response.data);
+<<<<<<< HEAD
       console.log("response", Data);
       const averages = calculateAverages(response.data);
       const calculatedAlldata = calculateAlldata(response.data);
       const timeData = calculateTimedata(response.data);
+=======
+      const averages = calculateAverages(Data);
+      const calculatedAlldata = calculateAlldata(Data);
+      const timeData = calculateTimedata(Data);
+>>>>>>> 00e5dbe8dfde4434bb0ca8a6eb51b26718f0a89b
 
       const chartArray = averages.map((obj) => {
         return [
@@ -194,6 +199,8 @@ const SensorCont = (props) => {
         })
       );
       setCsvAlldata(csvAllArray);
+      setCsvData(csvAllArray);
+      allClickHandle();
 
       const allTimeArray = [];
       for (const date in timeData) {
@@ -328,6 +335,14 @@ const SensorCont = (props) => {
     setTableFlag(false);
   };
 
+  const csvHandle = () => {
+    if (tableFlag) {
+      timeClickHandle();
+    } else {
+      allClickHandle();
+    }
+  };
+
   return (
     <div>
       <Card>
@@ -437,12 +452,16 @@ const SensorCont = (props) => {
               >
                 인쇄
               </button>
+              {console.log("csvData : ", csvData)}
               <CSVLink
                 data={csvData}
                 headers={csvHeader}
                 filename={"환경센서_CSV_데이터"}
               >
-                <button className={classes.tableHeader__btn}>
+                <button
+                  className={classes.tableHeader__btn}
+                  onClick={csvHandle}
+                >
                   CSV 다운로드
                 </button>
               </CSVLink>
