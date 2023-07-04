@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import { hoursToMilliseconds, set } from "date-fns";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -100,22 +100,16 @@ const SensorCont = (props) => {
   async function handleClick(sd, ed) {
     setIsLoading(true);
     try {
-<<<<<<< HEAD
-      const dataLink = "http://114.70.22.49:8080/sensorData" + sensorNum;
-=======
-      const dataLink = "http://kusmartfarm.synology.me:8080/sensorData" + sensorNum;
->>>>>>> df6e327a1f245446e4ccf4ca3e88c9372141ad7e
+      const dataLink = "http://localhost:8080/sensorData" + sensorNum;
 
-      const response = await axios.get(dataLink,{
+      const response = await axios.get(dataLink, {
         withCredentials: true,
         params: {
           startDate: sd,
           endDate: ed,
         },
       });
-
       setData(response.data);
-      console.log("response", response.data);
       const averages = calculateAverages(Data);
       const calculatedAlldata = calculateAlldata(Data);
       const timeData = calculateTimedata(Data);
@@ -193,6 +187,8 @@ const SensorCont = (props) => {
         })
       );
       setCsvAlldata(csvAllArray);
+      setCsvData(csvAllArray);
+      allClickHandle();
 
       const allTimeArray = [];
       for (const date in timeData) {
@@ -327,6 +323,14 @@ const SensorCont = (props) => {
     setTableFlag(false);
   };
 
+  const csvHandle = () => {
+    if (tableFlag) {
+      timeClickHandle();
+    } else {
+      allClickHandle();
+    }
+  };
+
   return (
     <div>
       <Card>
@@ -436,12 +440,16 @@ const SensorCont = (props) => {
               >
                 인쇄
               </button>
+              {console.log("csvData : ", csvData)}
               <CSVLink
                 data={csvData}
                 headers={csvHeader}
                 filename={"환경센서_CSV_데이터"}
               >
-                <button className={classes.tableHeader__btn}>
+                <button
+                  className={classes.tableHeader__btn}
+                  onClick={csvHandle}
+                >
                   CSV 다운로드
                 </button>
               </CSVLink>
