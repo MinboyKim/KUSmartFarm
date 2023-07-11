@@ -106,6 +106,7 @@ const SensorCont = (props) => {
     try {
       const dataLink =
         "http://kusmartfarm.synology.me:8080/sensorData" + sensorNum;
+      //"http://localhost:8080/sensorData" + sensorNum;
 
       const response = await axios.get(dataLink, {
         withCredentials: true,
@@ -115,7 +116,7 @@ const SensorCont = (props) => {
         },
       });
       setData(response.data);
-      console.log("response", Data);
+
       const averages = calculateAverages(response.data);
       const calculatedAlldata = calculateAlldata(response.data);
       const timeData = calculateTimedata(response.data);
@@ -123,20 +124,26 @@ const SensorCont = (props) => {
       const chartArray = averages.map((obj) => {
         return [
           obj.WRT_DATE,
+          obj.AVG_TEMP,
+          obj.AVG_HUMT,
           obj.AVG_CO2,
           obj.AVG_NH3,
           obj.AVG_H2S,
-          obj.AVG_HUMT,
-          obj.AVG_TEMP,
         ];
       });
-      chartArray.unshift(["Date", "CO2", "NH3", "H2S", "HUMT", "TEMP"]);
+      chartArray.unshift(["Date", "TEMP", "HUMT", "CO2", "NH3", "H2S"]);
       setChartData(chartArray);
       console.log("chartData", chartData);
 
       const allSensorArray = calculatedAlldata.map((obj) => {
         return [
           obj.WRT_DATE,
+          obj.MIN_TEMP,
+          obj.MAX_TEMP,
+          obj.AVG_TEMP,
+          obj.MIN_HUMT,
+          obj.MAX_HUMT,
+          obj.AVG_HUMT,
           obj.MIN_CO2,
           obj.MAX_CO2,
           obj.AVG_CO2,
@@ -146,12 +153,6 @@ const SensorCont = (props) => {
           obj.MIN_H2S,
           obj.MAX_H2S,
           obj.AVG_H2S,
-          obj.MIN_HUMT,
-          obj.MAX_HUMT,
-          obj.AVG_HUMT,
-          obj.MIN_TEMP,
-          obj.MAX_TEMP,
-          obj.AVG_TEMP,
         ];
       });
       setAllSensorData(allSensorArray);
@@ -159,6 +160,12 @@ const SensorCont = (props) => {
       const csvAllArray = allSensorArray.map(
         ([
           date,
+          temp_lo,
+          temp_hi,
+          temp_avg,
+          humt_lo,
+          humt_hi,
+          humt_avg,
           co2_lo,
           co2_hi,
           co2_avg,
@@ -168,14 +175,14 @@ const SensorCont = (props) => {
           h2s_lo,
           h2s_hi,
           h2s_avg,
-          humt_lo,
-          humt_hi,
-          humt_avg,
-          temp_lo,
-          temp_hi,
-          temp_avg,
         ]) => ({
           date,
+          temp_lo,
+          temp_hi,
+          temp_avg,
+          humt_lo,
+          humt_hi,
+          humt_avg,
           co2_lo,
           co2_hi,
           co2_avg,
@@ -185,12 +192,6 @@ const SensorCont = (props) => {
           h2s_lo,
           h2s_hi,
           h2s_avg,
-          humt_lo,
-          humt_hi,
-          humt_avg,
-          temp_lo,
-          temp_hi,
-          temp_avg,
         })
       );
       setCsvAlldata(csvAllArray);
@@ -203,7 +204,7 @@ const SensorCont = (props) => {
 
         for (const hour in timeDataForDate) {
           const data = timeDataForDate[hour];
-          const { CO2, NH3, H2S, HUMT, TEMP } = data;
+          const { TEMP, HUMT, CO2, NH3, H2S } = data;
           if (hour < 9) {
             var time = "0" + hour + " ~ " + "0" + (parseInt(hour) + 1);
           } else if (hour == 9) {
@@ -214,17 +215,18 @@ const SensorCont = (props) => {
           allTimeArray.push([date, time, TEMP, HUMT, CO2, NH3, H2S]);
         }
       }
+      console.log("allTimeArray!@#!@#@!#@!#@!#", allTimeArray);
       setTimeSensorData(allTimeArray);
 
       const csvTimeArray = allTimeArray.map(
-        ([date, time, co2, nh3, h2s, humt, temp]) => ({
+        ([date, time, temp, humt, co2, nh3, h2s]) => ({
           date,
           time,
+          temp,
+          humt,
           co2,
           nh3,
           h2s,
-          humt,
-          temp,
         })
       );
       setCsvTimedata(csvTimeArray);
@@ -235,7 +237,6 @@ const SensorCont = (props) => {
   }
 
   function calculateAverages(data) {
-    console.log("data", data);
     const groups = {};
 
     for (const obj of data) {
@@ -243,10 +244,10 @@ const SensorCont = (props) => {
       if (!groups[WRT_DATE]) {
         groups[WRT_DATE] = {
           count: 0,
+          sumTEMP: 0,
+          sumHUMT: 0,
           sumCO2: 0,
           sumNH3: 0,
-          sumHUMT: 0,
-          sumTEMP: 0,
           sumH2S: 0,
         };
       }
@@ -257,7 +258,6 @@ const SensorCont = (props) => {
       groups[WRT_DATE].sumH2S += +obj.H2S_DATA.toFixed(2);
       groups[WRT_DATE].sumNH3 += +obj.NH3_DATA.toFixed(2);
       groups[WRT_DATE].sumHUMT += +obj.HUMT_DATA.toFixed(2);
-
       groups[WRT_DATE].sumTEMP += +obj.TEMP_DATA.toFixed(2);
     }
 
@@ -269,11 +269,11 @@ const SensorCont = (props) => {
       averages.push({
         WRT_DATE: key,
 
+        AVG_TEMP: +(group.sumTEMP / count).toFixed(3),
+        AVG_HUMT: +(group.sumHUMT / count).toFixed(3),
         AVG_CO2: +(group.sumCO2 / count).toFixed(3),
         AVG_NH3: +(group.sumNH3 / count).toFixed(3),
         AVG_H2S: +(group.sumH2S / count).toFixed(3),
-        AVG_HUMT: +(group.sumHUMT / count).toFixed(3),
-        AVG_TEMP: +(group.sumTEMP / count).toFixed(3),
       });
     }
 
@@ -283,15 +283,21 @@ const SensorCont = (props) => {
   const headers = [
     { label: "Date", key: "date" },
     { label: "Time", key: "time" },
+    { label: "TEMP", key: "temp" },
+    { label: "HUMT", key: "humt" },
     { label: "CO2", key: "co2" },
     { label: "NH3", key: "nh3" },
     { label: "H2S", key: "h2s" },
-    { label: "HUMT", key: "humt" },
-    { label: "TEMP", key: "temp" },
   ];
 
   const headersAll = [
     { label: "Date", key: "date" },
+    { label: "TEMP_LOW", key: "temp_lo" },
+    { label: "TEMP_HIGH", key: "temp_hi" },
+    { label: "TEMP_AVG", key: "temp_avg" },
+    { label: "HUMT_LOW", key: "humt_lo" },
+    { label: "HUMT_HIGH", key: "humt_hi" },
+    { label: "HUMT_AVG", key: "humt_avg" },
     { label: "CO2_LOW", key: "co2_lo" },
     { label: "CO2_HIGH", key: "co2_hi" },
     { label: "CO2_AVG", key: "co2_avg" },
@@ -301,12 +307,6 @@ const SensorCont = (props) => {
     { label: "H2S_LOW", key: "h2s_lo" },
     { label: "H2S_HIGH", key: "h2s_hi" },
     { label: "H2S_AVG", key: "h2s_avg" },
-    { label: "HUMT_LOW", key: "humt_lo" },
-    { label: "HUMT_HIGH", key: "humt_hi" },
-    { label: "HUMT_AVG", key: "humt_avg" },
-    { label: "TEMP_LOW", key: "temp_lo" },
-    { label: "TEMP_HIGH", key: "temp_hi" },
-    { label: "TEMP_AVG", key: "temp_avg" },
   ];
 
   const onClickPrint = () => {

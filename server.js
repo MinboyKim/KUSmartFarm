@@ -28,7 +28,6 @@ const connection = mysql.createConnection({
   database: "KU", // 데이터베이스 이름
   port: 3306, // 포트 번호 (기본값: 3306)
 });
-s;
 
 const corsOptions = {
   origin: "http://localhost:8080",

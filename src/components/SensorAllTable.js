@@ -11,12 +11,54 @@ const SensorAllTable = forwardRef((props, ref) => {
             textAlign: "center",
           }}
         >
-          <th rowSpan={2}>일자</th>
-          <th colSpan={3}>온도</th>
-          <th colSpan={3}>습도</th>
-          <th colSpan={3}>CO2</th>
-          <th colSpan={3}>암모니아</th>
-          <th colSpan={3}>황화수소</th>
+          <th
+            rowSpan={2}
+            style={{
+              textAlign: "center",
+            }}
+          >
+            일자
+          </th>
+          <th
+            colSpan={3}
+            style={{
+              textAlign: "center",
+            }}
+          >
+            온도(℃)
+          </th>
+          <th
+            colSpan={3}
+            style={{
+              textAlign: "center",
+            }}
+          >
+            습도(%)
+          </th>
+          <th
+            colSpan={3}
+            style={{
+              textAlign: "center",
+            }}
+          >
+            이산화탄소(PPM)
+          </th>
+          <th
+            colSpan={3}
+            style={{
+              textAlign: "center",
+            }}
+          >
+            암모니아(PPM)
+          </th>
+          <th
+            colSpan={3}
+            style={{
+              textAlign: "center",
+            }}
+          >
+            황화수소(PPM)
+          </th>
           <tr>
             <td
               style={{

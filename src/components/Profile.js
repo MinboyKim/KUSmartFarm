@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import Profiles from "../css/Profile.module.css";
 
 const Profile = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
   return (
     <div className={Profiles.back}>
       <div className={Profiles.image}>
@@ -11,8 +15,10 @@ const Profile = () => {
       <div className={Profiles.text}>
         <p>우리농장</p>
         <br />
-        <p>안녕하세요 강대훈님</p>
-        <p>최근접속:2023년 06월 1일</p>
+        <p>안녕하세요.</p>
+        <p>
+          최근접속:{year}년 {month}월 {day}일
+        </p>
       </div>
     </div>
   );

@@ -93,6 +93,7 @@ const ScaleCont = (props) => {
     try {
       const dataLink =
         "http://kusmartfarm.synology.me:8080/scaleData" + scaleNum;
+      //"http://localhost:8080/scaleData" + scaleNum;
 
       const response = await axios.get(dataLink, {
         params: {

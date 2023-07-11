@@ -17,10 +17,10 @@ const SensorTimeTable = forwardRef((props, ref) => {
               시간
             </th>
             <th rowSpan={2} style={{ textAlign: "center" }}>
-              온도
+              온도(℃)
             </th>
             <th rowSpan={2} style={{ textAlign: "center" }}>
-              습도
+              습도(%)
             </th>
             <th rowSpan={2} style={{ textAlign: "center" }}>
               이산화탄소(PPM)
@@ -54,7 +54,7 @@ const SensorTimeTable = forwardRef((props, ref) => {
           </tr>
         </thead>
         <tbody>
-          {allTimeArray.slice(1).map((rowData, index) => (
+          {allTimeArray.map((rowData, index) => (
             <tr key={index}>
               {rowData.map((data, dataIndex) => (
                 <td key={dataIndex} style={{ textAlign: "center" }}>
