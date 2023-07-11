@@ -28,10 +28,10 @@ Content-Type: application/json
 Body: { "error": "Internal Server Error" }
 */
 const corsOptions = {
-    origin: "localhost:8080"
-  };
-  
-  app.use(cors(corsOptions));
+  origin: "http://kusmartfarm.synology.me:8080",
+};
+
+app.use(cors(corsOptions));
 
 connection.connect(function (err) {
   if (err) {
@@ -54,38 +54,36 @@ app.get("/sensorData1", (req, res) => {
     //startDate와 endDate가 ? 자리에 들어간다.
     if (err) {
       console.error("Error executing query: " + err.stack);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: err.message });
       return;
     }
-    
+
     // 쿼리 결과를 JSON 형태로 반환
     res.json(results);
   });
 });
 
 app.get("/sensorData2", (req, res) => {
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-    console.log(startDate, endDate);    
-  
-    // MySQL 쿼리 작성
-    const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '002')`;
-  
-    // MySQL 쿼리 실행
-    connection.query(query, [startDate, endDate], (err, results) => {
-      //startDate와 endDate가 ? 자리에 들어간다.
-      if (err) {
-        console.error("Error executing query: " + err.stack);
-        res.status(500).json({ error: "Internal Server Error" });
-        return;
-      }
-  
-      // 쿼리 결과를 JSON 형태로 반환
-      res.json(results);
-    });
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  console.log(startDate, endDate);
+
+  // MySQL 쿼리 작성
+  const query = `SELECT * FROM KU_TBL_ENVIRONMENT_HIST WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '002')`;
+
+  // MySQL 쿼리 실행
+  connection.query(query, [startDate, endDate], (err, results) => {
+    //startDate와 endDate가 ? 자리에 들어간다.
+    if (err) {
+      console.error("Error executing query: " + err.stack);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+
+    // 쿼리 결과를 JSON 형태로 반환
+    res.json(results);
   });
-
-
+});
 
 // MySQL 쿼리 작성
 
@@ -110,44 +108,44 @@ app.get("/scaleData1", (req, res) => {
 });
 
 app.get("/scaleData2", (req, res) => {
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-    // MySQL 쿼리 작성
-    const query = `SELECT * FROM KU_TBL_SCALE_HIST WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '002')`;
-  
-    // MySQL 쿼리 실행
-    connection.query(query, [startDate, endDate], (err, results) => {
-      //startDate와 endDate가 ? 자리에 들어간다.
-      if (err) {
-        console.error("Error executing query: " + err.stack);
-        res.status(500).json({ error: "Internal Server Error" });
-        return;
-      }
-  
-      // 쿼리 결과를 JSON 형태로 반환
-      res.json(results);
-    });
-  });
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  // MySQL 쿼리 작성
+  const query = `SELECT * FROM KU_TBL_SCALE_HIST WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '002')`;
 
-  app.get("/scaleData3", (req, res) => {
-    const startDate = req.query.startDate;
-    const endDate = req.query.endDate;
-    // MySQL 쿼리 작성
-    const query = `SELECT * FROM KU_TBL_SCALE_HIST WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '003')`;
-  
-    // MySQL 쿼리 실행
-    connection.query(query, [startDate, endDate], (err, results) => {
-      //startDate와 endDate가 ? 자리에 들어간다.
-      if (err) {
-        console.error("Error executing query: " + err.stack);
-        res.status(500).json({ error: "Internal Server Error" });
-        return;
-      }
-  
-      // 쿼리 결과를 JSON 형태로 반환
-      res.json(results);
-    });
+  // MySQL 쿼리 실행
+  connection.query(query, [startDate, endDate], (err, results) => {
+    //startDate와 endDate가 ? 자리에 들어간다.
+    if (err) {
+      console.error("Error executing query: " + err.stack);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+
+    // 쿼리 결과를 JSON 형태로 반환
+    res.json(results);
   });
+});
+
+app.get("/scaleData3", (req, res) => {
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+  // MySQL 쿼리 작성
+  const query = `SELECT * FROM KU_TBL_SCALE_HIST WHERE (WRT_DATE BETWEEN ? AND ?) AND (MAIN_SEQ = '003')`;
+
+  // MySQL 쿼리 실행
+  connection.query(query, [startDate, endDate], (err, results) => {
+    //startDate와 endDate가 ? 자리에 들어간다.
+    if (err) {
+      console.error("Error executing query: " + err.stack);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
+    }
+
+    // 쿼리 결과를 JSON 형태로 반환
+    res.json(results);
+  });
+});
 
 app.use(express.static(path.join(__dirname, "build")));
 
